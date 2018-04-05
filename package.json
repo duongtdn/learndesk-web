@@ -1,0 +1,37 @@
+{
+  "name": "study-room-client",
+  "version": "1.0.0",
+  "description": "web client of study-room",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --port 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duongtdn/studyroom-web.git"
+  },
+  "author": "duongtdn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/duongtdn/studyroom-web/issues"
+  },
+  "homepage": "https://github.com/duongtdn/studyroom-web#readme",
+  "dependencies": {
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "content-presenter": "^1.0.0",
+    "youtube-player-plugin": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1"
+  }
+}
