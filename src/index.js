@@ -3,44 +3,78 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
-import { ContentPresenter } from 'content-presenter'
-import { YoutubePlayerReactPlugin } from 'youtube-player-plugin'
-
 import style from './css/app.css'
+
+import Header from './Header'
+import ContentPlayer from './ContentPlayer'
+
+const topics = [
+  {
+    id: 1, 
+    name: 'Topic 1 is the first topic, id define topic number',
+    contents: [
+      {id: 0, player: 'YOUTUBE', src: 'R9ZE97rnBqE'},
+      {id: 1, player: 'YOUTUBE', src: 'r6bkETisayg'},
+    ]
+  },
+  {
+    id: 2, 
+    name: 'The second one, whatever name can be used',
+    contents: [
+      {id: 0, player: 'YOUTUBE', src: 'X6a9odk6b_c'},
+      {id: 1, player: 'YOUTUBE', src: 'XQMnT9baoi8'},
+      {id: 3, player: 'YOUTUBE', src: 'dUNm721wTec'},
+    ]
+  },
+  {
+    id: 3, 
+    name: 'Name should not too long',
+    contents: [
+      {id: 0, player: 'YOUTUBE', src: 'R9ZE97rnBqE'},
+      {id: 1, player: 'YOUTUBE', src: 'r6bkETisayg'},
+    ]
+  }
+]
 
 class APP extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { index : 0};
-
-    this.players = [
-      YoutubePlayerReactPlugin
-    ];
+    this.state = { contentIndex : 0, topicIndex: 0 };
 
   }
 
   render() {
-    const data = [
-      {_id: 0, player: 'YOUTUBE', src: 'R9ZE97rnBqE'},
-      {_id: 1, player: 'YOUTUBE', src: 'r6bkETisayg'},
-    ]
     return (
       <div>
-        <div>
-          <button onClick={() => this.setState({index : this.state.index-1})}> Back </button>
-          <button onClick={() => this.setState({index : this.state.index+1})}> Next </button>
+        <Header topics = {topics} 
+                currentIndex = {this.state.topicIndex}
+                onChangeTopic = {(index) => {this.setTopic(index)}}
+        />
+
+        <div className="row">
+
+          <div className="w3-threequarter w3-container">
+            <ContentPlayer  data = {topics[this.state.topicIndex].contents}
+                            contentIndex = {this.state.contentIndex}
+                            onContentChange = {(contentIndex) => this.setState({contentIndex})}
+            />
+          </div>
+
+          <div className="w3-quarter w3-container">
+            <h2>Content List</h2> 
+          </div>
+
         </div>
-        <ContentPresenter players = {this.players}
-                          data = {data}
-                          index = {this.state.index}
-                          onContentLoaded = {() => console.log(`Content loaded: ${this.state.index}`)}
-                          onContentFinished = {() => console.log(`Content finished: ${this.state.index}`)}
-                          onError = {err => console.log(err)}
-                          />
+        
       </div>
     )
   }
+
+  setTopic(index) {
+    this.setState({ topicIndex : index, contentIndex: 0 })
+  }
+
 }
 
 render(<APP />, document.getElementById('root'));
