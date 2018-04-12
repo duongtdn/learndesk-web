@@ -31,8 +31,8 @@ class ContentPlayer extends Component {
                           onContentFinished = {() => console.log(`Content finished: ${this.props.contentIndex}`)}
                           onError = {err => console.log(err)}
         />
-        <ProgressBar />
-        <div className="w3-right">
+        
+        <div className="w3-right w3-padding">
           <button className="w3-button" onClick={() => this.props.onContentChange(this.props.contentIndex-1)}> Previous </button>
           <button className="w3-button" onClick={() => this.props.onContentChange(this.props.contentIndex+1)}> Next </button>
         </div>
