@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 
-import w3Style from './css/w3.css'
 import contentStyle from 'content-presenter/dist/css/content.css'
 
 import { ContentPresenter } from 'content-presenter'

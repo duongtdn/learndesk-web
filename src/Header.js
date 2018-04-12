@@ -2,8 +2,6 @@
 
 import React, { Component } from 'react'
 
-import style from './css/w3.css'
-
 class Header extends Component {
   constructor(props) {
     super(props);
