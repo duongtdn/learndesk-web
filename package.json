@@ -1,8 +1,8 @@
 {
   "name": "study-room-client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "web client of learn-desk",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "webpack-dev-server --port 3000"
   },
