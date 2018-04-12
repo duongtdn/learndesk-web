@@ -40,7 +40,7 @@ class Header extends Component {
         </div>
 
         {/* dropdown  */}
-        <div className={`w3-dropdown-content w3-light-grey ${drop}`} style={{fontFamily: 'Caveat', fontSize: '22px', padding: 0}}>
+        <div className={`w3-dropdown-content w3-light-grey ${drop}`} style={{fontFamily: 'Caveat', fontSize: '22px', padding: 0, width: '100%', zIndex: 999}}>
           {
             topics.map((topic,index) => (
               <a key = {topic.id} href="#" className="w3-button w3-border-bottom" style={{width: '100%', textAlign: 'left'}} onClick={() => this.changeTopic(index)}> 
