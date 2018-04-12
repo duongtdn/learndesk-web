@@ -7,31 +7,32 @@ import style from './css/app.css'
 
 import Header from './Header'
 import ContentPlayer from './ContentPlayer'
+import ContentList from './ContentList'
 
 const topics = [
   {
     id: 1, 
     name: 'Topic 1 is the first topic, id define topic number',
     contents: [
-      {id: 0, player: 'YOUTUBE', src: 'R9ZE97rnBqE'},
-      {id: 1, player: 'YOUTUBE', src: 'r6bkETisayg'},
+      {id: 0, player: 'YOUTUBE', src: 'R9ZE97rnBqE', name: 'Nick and Dave Conversation'},
+      {id: 1, player: 'YOUTUBE', src: 'r6bkETisayg', name: 'How to make friend and infulence people'},
     ]
   },
   {
     id: 2, 
     name: 'The second one, whatever name can be used',
     contents: [
-      {id: 0, player: 'YOUTUBE', src: 'X6a9odk6b_c'},
-      {id: 1, player: 'YOUTUBE', src: 'XQMnT9baoi8'},
-      {id: 3, player: 'YOUTUBE', src: 'dUNm721wTec'},
+      {id: 0, player: 'YOUTUBE', src: 'X6a9odk6b_c', name: 'Games of Thrones theme song: piano cover '},
+      {id: 1, player: 'YOUTUBE', src: 'XQMnT9baoi8', name: 'Dragonborn is comming: piano cover'},
+      {id: 3, player: 'YOUTUBE', src: 'dUNm721wTec', name: 'Age of agression'},
     ]
   },
   {
     id: 3, 
     name: 'Name should not too long',
     contents: [
-      {id: 0, player: 'YOUTUBE', src: 'R9ZE97rnBqE'},
-      {id: 1, player: 'YOUTUBE', src: 'r6bkETisayg'},
+      {id: 0, player: 'YOUTUBE', src: 'R9ZE97rnBqE', name: 'Nick and Dave Conversation'},
+      {id: 1, player: 'YOUTUBE', src: 'r6bkETisayg', name: 'The last storyline'},
     ]
   }
 ]
@@ -45,6 +46,7 @@ class APP extends Component {
   }
 
   render() {
+    const contentList = topics[this.state.topicIndex].contents;
     return (
       <div>
         <Header topics = {topics} 
@@ -55,14 +57,15 @@ class APP extends Component {
         <div className="row">
 
           <div className="w3-threequarter w3-container">
-            <ContentPlayer  data = {topics[this.state.topicIndex].contents}
+            <ContentPlayer  data = {contentList}
                             contentIndex = {this.state.contentIndex}
                             onContentChange = {(contentIndex) => this.setState({contentIndex})}
             />
           </div>
 
           <div className="w3-quarter w3-container">
-            <h2>Content List</h2> 
+            <ContentList data = {contentList} 
+            />
           </div>
 
         </div>
