@@ -7,9 +7,6 @@ import contentStyle from 'content-presenter/dist/css/content.css'
 import { ContentPresenter } from 'content-presenter'
 import { YoutubePlayerReactPlugin } from 'youtube-player-plugin'
 
-import ProgressBar from './ProgressBar'
-
-
 class ContentPlayer extends Component {
   constructor(props) {
     super(props);
