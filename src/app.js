@@ -37,7 +37,7 @@ const topics = [
   }
 ]
 
-class APP extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
 
@@ -80,4 +80,4 @@ class APP extends Component {
 
 }
 
-render(<APP />, document.getElementById('root'));
+render(<App />, document.getElementById('root'));
