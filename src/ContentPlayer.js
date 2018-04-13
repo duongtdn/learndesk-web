@@ -24,7 +24,7 @@ class ContentPlayer extends Component {
                           data = {this.props.data}
                           index = {this.props.contentIndex}
                           onContentLoaded = {() => console.log(`Content loaded: ${this.props.contentIndex}`)}
-                          onContentFinished = {() => console.log(`Content finished: ${this.props.contentIndex}`)}
+                          onContentFinished = {() => this.props.onFinished && this.props.onFinished(this.props.contentIndex)}
                           onError = {err => console.log(err)}
         />
         
