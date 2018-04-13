@@ -47,6 +47,7 @@ class App extends Component {
   }
 
   render() {
+    const topics = this.props.data;
     const contentList = topics[this.state.topicIndex].contents;
     return (
       <div>
@@ -81,9 +82,38 @@ class App extends Component {
   }
 
   changeContent(contentIndex) {
-    this.setState({contentIndex})
+    const topics = this.props.data;
+    const contents = topics[this.state.topicIndex].contents;
+
+    if (contentIndex < 0) {
+      const topicIndex = this.state.topicIndex - 1;
+      if (topicIndex > -1) {
+        contentIndex = 0;
+        this.setState({ topicIndex, contentIndex });
+      }
+      return
+    }
+
+    if (contentIndex < contents.length) {
+      this.setState({contentIndex});
+      return
+    }
+    
+    /* last content, move to next topic if any */
+    const topicIndex = this.state.topicIndex + 1;
+    if (topicIndex < topics.length) {
+      contentIndex = 0;
+      this.setState({ topicIndex, contentIndex });
+      return
+    }
+    
+
   }
 
 }
 
-render(<App />, document.getElementById('root'));
+const AppData = (context) => (
+  <App data = {topics} />
+)
+
+render(<AppData />, document.getElementById('root'));
