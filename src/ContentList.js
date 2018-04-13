@@ -8,6 +8,7 @@ class ContentList extends Component {
   }
   render() {
     const contentList = this.props.data || [];
+    const progress = this.props.progress || [];
     return (
       <div >
         <h3 className="w3-white" > Contents </h3>
@@ -22,7 +23,7 @@ class ContentList extends Component {
                     key={content.id}
                     onClick={() => this.changeContent(index)} >
                 <div className="w3-cell w3-cell-middle" style={{width:'40px'}}>
-                  <div className={`circle`} style={{ zIndex }}/>
+                  <div className={`circle ${progress[index]? 'completed':''}`} style={{ zIndex }}/>
                 </div>
 
                 <div className="w3-container w3-cell">
