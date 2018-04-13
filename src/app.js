@@ -59,6 +59,7 @@ class App extends Component {
         <Header topics = {topics} 
                 currentIndex = {this.state.topicIndex}
                 onChangeTopic = {(index) => {this.changeTopic(index)}}
+                progress = {this.props.progress}
         />
 
         <div className="row">

@@ -3,6 +3,16 @@
   border-bottom: 1px solid #eee;
 }
 
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-check {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .circle {
   width: 2em;
   height: 2em;
