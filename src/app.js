@@ -147,7 +147,6 @@ class AppData extends Component {
       progress[topicIndex] = [];
     }
     progress[topicIndex][contentIndex] = true;
-    console.log(process)
     this.setState({ progress })
   }
 }
