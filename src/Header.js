@@ -45,15 +45,6 @@ class Header extends Component {
           {
             topics.map((topic,index) => (
               <a key = {topic.id} href="#" className="w3-button w3-border-bottom" style={{width: '100%', textAlign: 'left'}} onClick={() => this.changeTopic(index)}> 
-                {/* <div className="w3-row-cell">
-                  <div className="w3-cell">
-                    <div className="w3-text-blue"> Topic {topic.id} </div>
-                    <div style={{whiteSpace: 'normal'}}> {topic.name} </div>
-                  </div>
-                  <div className="w3-cell w3-cell-middle w3-right-align w3-rest">
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                  </div>
-                </div> */}
                 <div className="dropdown-container">
                   <div >
                     <div className="w3-text-blue"> Topic {topic.id} </div>
