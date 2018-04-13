@@ -10,7 +10,11 @@ import Header from './Header'
 import ContentPlayer from './ContentPlayer'
 import ContentList from './ContentList'
 
-const topics = [
+const progress = [
+
+]
+
+const data = [
   {
     id: 1, 
     name: 'Topic 1 is the first topic, id define topic number',
@@ -44,6 +48,8 @@ class App extends Component {
 
     this.state = { contentIndex : 0, topicIndex: 0 };
 
+    this.completeContent = this.completeContent.bind(this)
+
   }
 
   render() {
@@ -61,13 +67,15 @@ class App extends Component {
           <div className="w3-threequarter w3-container">
             <ContentPlayer  data = {contentList}
                             contentIndex = {this.state.contentIndex}
-                            onContentChange = {(contentIndex) => this.changeContent(contentIndex)}
+                            onChangedContent = {(contentIndex) => this.changeContent(contentIndex)}
+                            onCompletedContent = {this.completeContent}
             />
           </div>
 
           <div className="w3-quarter w3-container">
             <ContentList  data = {contentList} 
-                          onContentChange = {(contentIndex) => this.changeContent(contentIndex)}
+                          onChangedContent = {(contentIndex) => this.changeContent(contentIndex)}
+                          progress = {this.props.progress[this.state.topicIndex]}
             />
           </div>
 
@@ -105,15 +113,43 @@ class App extends Component {
       contentIndex = 0;
       this.setState({ topicIndex, contentIndex });
       return
-    }
-    
+    }  
+  }
 
+  completeContent(contentIndex) {
+    this.props.onCompletedContent && this.props.onCompletedContent({
+      topicIndex: this.state.topicIndex,
+      contentIndex
+    });
+    this.changeContent(this.state.contentIndex+1)
   }
 
 }
 
-const AppData = (context) => (
-  <App data = {topics} />
-)
+class AppData extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { data, progress }
+    this.updateProgress = this.updateProgress.bind(this);
+  }
+
+  render() {
+    return (
+      <App  data = {this.state.data}
+            progress = {this.state.progress}
+            onCompletedContent = {this.updateProgress}
+      />
+    )
+  }
+
+  updateProgress({topicIndex, contentIndex}) {
+    if (!progress[topicIndex]) {
+      progress[topicIndex] = [];
+    }
+    progress[topicIndex][contentIndex] = true;
+    console.log(process)
+    this.setState({ progress })
+  }
+}
 
 render(<AppData />, document.getElementById('root'));

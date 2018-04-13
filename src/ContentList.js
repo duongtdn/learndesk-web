@@ -39,7 +39,7 @@ class ContentList extends Component {
   }
 
   changeContent(index) {
-    this.props.onContentChange && this.props.onContentChange(index);
+    this.props.onChangedContent && this.props.onChangedContent(index);
   }
 }
 
