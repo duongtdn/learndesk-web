@@ -37,7 +37,8 @@ class ContentPlayer extends Component {
   }
 
   onCompletedContent(contentIndex) {
-    this.props.onCompletedContent && this.props.onCompletedContent(contentIndex)
+    const contentId = this.props.data[contentIndex].id;
+    this.props.onCompletedContent && this.props.onCompletedContent(contentId)
   }
 
 }

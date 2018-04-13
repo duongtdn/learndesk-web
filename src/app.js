@@ -10,9 +10,7 @@ import Header from './Header'
 import ContentPlayer from './ContentPlayer'
 import ContentList from './ContentList'
 
-const progress = [
-
-]
+const progress = {}
 
 const data = [
   {
@@ -54,7 +52,8 @@ class App extends Component {
 
   render() {
     const topics = this.props.data;
-    const contentList = topics[this.state.topicIndex].contents;
+    const topic = topics[this.state.topicIndex];
+    const contentList = topic.contents;
     return (
       <div>
         <Header topics = {topics} 
@@ -75,7 +74,7 @@ class App extends Component {
           <div className="w3-quarter w3-container">
             <ContentList  data = {contentList} 
                           onChangedContent = {(contentIndex) => this.changeContent(contentIndex)}
-                          progress = {this.props.progress[this.state.topicIndex]}
+                          progress = {this.props.progress[topic.id]}
             />
           </div>
 
@@ -116,10 +115,11 @@ class App extends Component {
     }  
   }
 
-  completeContent(contentIndex) {
+  completeContent(contentId) {
+    const topicId = this.props.data[this.state.topicIndex].id;
     this.props.onCompletedContent && this.props.onCompletedContent({
-      topicIndex: this.state.topicIndex,
-      contentIndex
+      topicId,
+      contentId
     });
     this.changeContent(this.state.contentIndex+1)
   }
@@ -142,11 +142,11 @@ class AppData extends Component {
     )
   }
 
-  updateProgress({topicIndex, contentIndex}) {
-    if (!progress[topicIndex]) {
-      progress[topicIndex] = [];
+  updateProgress({topicId, contentId}) {
+    if (!progress[topicId]) {
+      progress[topicId] = {};
     }
-    progress[topicIndex][contentIndex] = true;
+    progress[topicId][contentId] = true;
     this.setState({ progress })
   }
 }
