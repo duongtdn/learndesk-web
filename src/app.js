@@ -52,7 +52,7 @@ class App extends Component {
       <div>
         <Header topics = {topics} 
                 currentIndex = {this.state.topicIndex}
-                onChangeTopic = {(index) => {this.setTopic(index)}}
+                onChangeTopic = {(index) => {this.changeTopic(index)}}
         />
 
         <div className="row">
@@ -60,12 +60,13 @@ class App extends Component {
           <div className="w3-threequarter w3-container">
             <ContentPlayer  data = {contentList}
                             contentIndex = {this.state.contentIndex}
-                            onContentChange = {(contentIndex) => this.setState({contentIndex})}
+                            onContentChange = {(contentIndex) => this.changeContent(contentIndex)}
             />
           </div>
 
           <div className="w3-quarter w3-container">
-            <ContentList data = {contentList} 
+            <ContentList  data = {contentList} 
+                          onContentChange = {(contentIndex) => this.changeContent(contentIndex)}
             />
           </div>
 
@@ -75,8 +76,12 @@ class App extends Component {
     )
   }
 
-  setTopic(index) {
+  changeTopic(index) {
     this.setState({ topicIndex : index, contentIndex: 0 })
+  }
+
+  changeContent(contentIndex) {
+    this.setState({contentIndex})
   }
 
 }

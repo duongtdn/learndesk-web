@@ -17,7 +17,10 @@ class ContentList extends Component {
           contentList.map( (content, index) => {
             const zIndex = 100 - content.id; 
             return (
-              <div className="w3-cell-row w3-hover-pale-blue" style={{width:'100%', cursor: 'pointer'}} key={content.id} >
+              <div  className="w3-cell-row w3-hover-pale-blue" 
+                    style={{width:'100%', cursor: 'pointer'}} 
+                    key={content.id}
+                    onClick={() => this.changeContent(index)} >
                 <div className="w3-cell w3-cell-middle" style={{width:'40px'}}>
                   <div className={`circle`} style={{ zIndex }}/>
                 </div>
@@ -32,6 +35,10 @@ class ContentList extends Component {
         </div>
       </div>
     )
+  }
+
+  changeContent(index) {
+    this.props.onContentChange && this.props.onContentChange(index);
   }
 }
 
