@@ -12,9 +12,6 @@ import ContentList from './ContentList'
 
 import { parseIDsFromHref } from './location-href'
 
-console.log(parseIDsFromHref())
-
-
 const progress = {}
 
 const data = [
@@ -52,6 +49,21 @@ class App extends Component {
     this.state = { contentIndex : 0, topicIndex: 0 };
 
     this.completeContent = this.completeContent.bind(this)
+
+  }
+
+  componentWillMount() {
+    const {courseId, topicId} = parseIDsFromHref();
+    /* find the index of topicId */
+    const topics = this.props.data;
+    let topicIndex = 0;
+    const topic = topics.filter((topic, index) => {
+      if (topic.id == topicId) { // a string vs a number
+        topicIndex = index;
+      }
+    })
+
+    this.setState({ topicIndex });
 
   }
 
