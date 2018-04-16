@@ -10,6 +10,11 @@ import Header from './Header'
 import ContentPlayer from './ContentPlayer'
 import ContentList from './ContentList'
 
+import { parseIDsFromHref } from './location-href'
+
+console.log(parseIDsFromHref())
+
+
 const progress = {}
 
 const data = [
@@ -98,6 +103,7 @@ class App extends Component {
       if (topicIndex > -1) {
         contentIndex = 0;
         this.setState({ topicIndex, contentIndex });
+        window.history.replaceState(null,null,`#${topics[topicIndex].id}`);
       }
       return
     }
@@ -112,6 +118,7 @@ class App extends Component {
     if (topicIndex < topics.length) {
       contentIndex = 0;
       this.setState({ topicIndex, contentIndex });
+      window.history.replaceState(null,null,`#${topics[topicIndex].id}`);
       return
     }  
   }
