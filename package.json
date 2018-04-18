@@ -1,6 +1,6 @@
 {
-  "name": "study-room-client",
-  "version": "0.1.0",
+  "name": "learndesk-web",
+  "version": "1.0.0",
   "description": "web client of learn-desk",
   "main": "src/index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/duongtdn/studyroom-web.git"
+    "url": "git+https://github.com/duongtdn/learndesk-web.git"
   },
   "author": "duongtdn",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/duongtdn/studyroom-web/issues"
+    "url": "https://github.com/duongtdn/learndesk-web/issues"
   },
-  "homepage": "https://github.com/duongtdn/studyroom-web#readme",
+  "homepage": "https://github.com/duongtdn/learndesk-web#readme",
   "dependencies": {
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
