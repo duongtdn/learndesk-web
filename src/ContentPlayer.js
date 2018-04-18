@@ -6,13 +6,15 @@ import contentStyle from 'content-presenter/dist/css/content.css'
 
 import { ContentPresenter } from 'content-presenter'
 import { YoutubePlayerReactPlugin } from 'youtube-player-plugin'
+import { QuizPlayerReactPlugin } from 'quiz-player-plugin'
 
 class ContentPlayer extends Component {
   constructor(props) {
     super(props);
 
     this.players = [
-      YoutubePlayerReactPlugin
+      YoutubePlayerReactPlugin,
+      QuizPlayerReactPlugin
     ];
     
   }
