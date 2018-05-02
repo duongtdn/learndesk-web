@@ -29,7 +29,7 @@ class Header extends Component {
             <span > Topic {currentTopic.id} </span> &nbsp;
             <span className="w3-hide-small"> 
               <i className="fa fa-angle-right"></i>
-              &nbsp; {currentTopic.name} 
+              &nbsp; {currentTopic.title} 
             </span>
             &nbsp; <i className="fa fa-caret-down"></i>
           </a>
