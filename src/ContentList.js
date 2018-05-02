@@ -27,7 +27,7 @@ class ContentList extends Component {
                 </div>
 
                 <div className="w3-container w3-cell">
-                  <p> {content.name} </p>
+                  <p> {content.title} </p>
                 </div>
               </div>
             )
