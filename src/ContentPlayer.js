@@ -23,23 +23,21 @@ class ContentPlayer extends Component {
     return (
       <div>
         <ContentPresenter players = {this.players}
-                          data = {this.props.data}
-                          index = {this.props.contentIndex}
-                          onLoadedContent = {() => console.log(`Content loaded: ${this.props.contentIndex}`)}
-                          onFinishedContent = {() => this.onCompletedContent(this.props.contentIndex)}
+                          content = {this.props.content}
+                          onLoadedContent = {() => console.log(`Content loaded: ${this.props.content.id}`)}
+                          onFinishedContent = {() => this.onCompletedContent(this.props.content.id)}
                           onError = {err => console.log(err)}
         />
         
         <div className="w3-right w3-padding">
-          <button className="w3-button" onClick={() => this.props.onChangedContent(this.props.contentIndex-1)}> Previous </button>
-          <button className="w3-button" onClick={() => this.props.onChangedContent(this.props.contentIndex+1)}> Next </button>
+          <button className="w3-button" onClick={() => this.props.moveToPreviousContent()}> Previous </button>
+          <button className="w3-button" onClick={() => this.props.moveToNextContent()}> Next </button>
         </div>
       </div>
     )
   }
 
-  onCompletedContent(contentIndex) {
-    const contentId = this.props.data[contentIndex].id;
+  onCompletedContent(contentId) {
     this.props.onCompletedContent && this.props.onCompletedContent(contentId)
   }
 

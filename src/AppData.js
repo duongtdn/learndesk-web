@@ -10,15 +10,22 @@ const progress = {}
 
 const data = [
   {
-    id: 1, 
+    id: '1', 
     name: 'Topic 1 is the first topic, id define topic number',
     contents: [
       {id: 0, player: 'YOUTUBE', src: 'R9ZE97rnBqE', name: 'Nick and Dave Conversation'},
       {id: 1, player: 'YOUTUBE', src: 'r6bkETisayg', name: 'How to make friend and infulence people'},
     ]
   },
+  { 
+    id: '1a', 
+    name: 'Topic 1 is the first topic, id define topic number',
+    contents: [
+      {id: 0, player: 'QUIZ', src: 'R9ZE97rnBqE', name: 'Quiz for test'},
+    ]
+  },
   {
-    id: 2, 
+    id: '2', 
     name: 'The second one, whatever name can be used',
     contents: [
       {id: 0, player: 'YOUTUBE', src: 'X6a9odk6b_c', name: 'Games of Thrones theme song: piano cover '},
@@ -27,7 +34,7 @@ const data = [
     ]
   },
   {
-    id: 3, 
+    id: '3', 
     name: 'Name should not too long',
     contents: [
       {id: 0, player: 'YOUTUBE', src: 'R9ZE97rnBqE', name: 'Nick and Dave Conversation'},

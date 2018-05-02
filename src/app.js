@@ -39,7 +39,7 @@ class App extends Component {
   render() {
     const topics = this.props.data;
     const topic = topics[this.state.topicIndex];
-    const contentList = topic.contents;
+    const content = topic.contents[this.state.contentIndex];
     return (
       <div>
         <Header topics = {topics} 
@@ -51,15 +51,15 @@ class App extends Component {
         <div className="row">
 
           <div className="w3-threequarter w3-container">
-            <ContentPlayer  data = {contentList}
-                            contentIndex = {this.state.contentIndex}
-                            onChangedContent = {(contentIndex) => this.changeContent(contentIndex)}
+            <ContentPlayer  content = {content}
+                            moveToPreviousContent = {() => this.changeContent(this.state.contentIndex-1)}
+                            moveToNextContent = {() => this.changeContent(this.state.contentIndex+1)}
                             onCompletedContent = {this.completeContent}
             />
           </div>
 
           <div className="w3-quarter w3-container">
-            <ContentList  data = {contentList} 
+            <ContentList  data = {topic.contents} 
                           onChangedContent = {(contentIndex) => this.changeContent(contentIndex)}
                           progress = {this.props.progress[topic.id]}
             />
