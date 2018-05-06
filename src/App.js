@@ -65,6 +65,7 @@ class App extends Component {
             <ContentList  data = {topic.contents} 
                           onChangedContent = {(contentIndex) => this.changeContent(contentIndex)}
                           progress = {this.props.progress[topic.id]}
+                          currentIndex = {this.state.contentIndex}
             />
           </div>
 

@@ -17,6 +17,7 @@ class ContentList extends Component {
         {
           contentList.map( (content, index) => {
             const zIndex = 100 - content.id; 
+            const highlight = this.props.currentIndex === index ? 'w3-text-blue' : ''
             return (
               <div  className="w3-cell-row w3-hover-pale-blue" 
                     style={{width:'100%', cursor: 'pointer'}} 
@@ -26,7 +27,7 @@ class ContentList extends Component {
                   <div className={`circle ${progress[content.id]? 'completed':''}`} style={{ zIndex }}/>
                 </div>
 
-                <div className="w3-container w3-cell">
+                <div className={`w3-container w3-cell ${highlight}`}>
                   <p> {content.title} </p>
                 </div>
               </div>
