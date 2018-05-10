@@ -52,7 +52,6 @@ class ContentPlayer extends Component {
   onResize(height) {
     height = parseInt(height) + 80;
     this.setState({ height : height + 'px'})
-    console.log(height)
   }
 
   onCompletedContent(contentId) {
