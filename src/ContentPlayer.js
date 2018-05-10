@@ -38,8 +38,8 @@ class ContentPlayer extends Component {
         />
         
         <div className="w3-right w3-padding" style={{position: 'relative', zIndex: 2}} >
-          <button className="w3-button" onClick={() => this.props.moveToPreviousContent()}> Previous </button>
-          <button className="w3-button" onClick={() => this.props.moveToNextContent()}> Next </button>
+          <button className="w3-button no-outline" onClick={() => this.props.moveToPreviousContent()}> Previous </button>
+          <button className="w3-button no-outline" onClick={() => this.props.moveToNextContent()}> Next </button>
         </div>
       </div>
     )

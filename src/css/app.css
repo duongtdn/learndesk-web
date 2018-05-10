@@ -44,3 +44,7 @@
 .completed::before {
   background: #4CAF50!important;
 }
+
+.no-outline:focus {
+  outline: 0 none;
+}
