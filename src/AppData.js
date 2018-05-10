@@ -31,7 +31,7 @@ const data = [
     id: '1a', 
     title: 'Topic 1 is the first topic, id define topic number',
     contents: [
-      {id: 0, player: 'QUIZ', src: 'R9ZE97rnBqE', title: 'Quiz for test'},
+      {id: 0, player: 'QUIZ', src: 'quiz1', title: 'Quiz for test'},
     ]
   },
   {

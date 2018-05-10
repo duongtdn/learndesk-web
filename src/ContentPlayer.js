@@ -12,21 +12,29 @@ class ContentPlayer extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      height: 'auto'
+    }
+
     this.players = [
       YoutubePlayerReactPlugin,
       QuizPlayerReactPlugin
     ];
     
+    ['onLoadedContent', 'onCompletedContent', 'onResize']
+    .forEach(method => this[method] = this[method].bind(this));
+
   }
 
   render() {
     return (
-      <div>
+      <div style={{height: this.state.height}} >
         <ContentPresenter players = {this.players}
                           content = {this.props.content}
-                          onLoadedContent = {() => console.log(`Content loaded: ${this.props.content.id}`)}
+                          onLoadedContent = {this.onLoadedContent}
                           onFinishedContent = {() => this.onCompletedContent(this.props.content.id)}
                           onError = {err => console.log(err)}
+                          onResize = {this.onResize}
         />
         
         <div className="w3-right w3-padding">
@@ -35,6 +43,16 @@ class ContentPlayer extends Component {
         </div>
       </div>
     )
+  }
+  onLoadedContent() {
+    this.setState({ height : 'auto'})
+    console.log(`Content loaded: ${this.props.content.id}`)
+  }
+
+  onResize(height) {
+    height = parseInt(height) + 80;
+    this.setState({ height : height + 'px'})
+    console.log(height)
   }
 
   onCompletedContent(contentId) {
