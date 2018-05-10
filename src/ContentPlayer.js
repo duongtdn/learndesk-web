@@ -37,7 +37,7 @@ class ContentPlayer extends Component {
                           onResize = {this.onResize}
         />
         
-        <div className="w3-right w3-padding">
+        <div className="w3-right w3-padding" style={{position: 'relative', zIndex: 2}} >
           <button className="w3-button" onClick={() => this.props.moveToPreviousContent()}> Previous </button>
           <button className="w3-button" onClick={() => this.props.moveToNextContent()}> Next </button>
         </div>
@@ -50,7 +50,7 @@ class ContentPlayer extends Component {
   }
 
   onResize(height) {
-    height = parseInt(height) + 80;
+    // height = parseInt(height) + 10;
     this.setState({ height : height + 'px'})
   }
 
