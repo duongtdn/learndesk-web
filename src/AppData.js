@@ -1,8 +1,10 @@
 "use strict"
 
 import React, { Component } from 'react'
+import { isLoggedUser } from '@stormgle/auth-client'
 
 import App from './App'
+import Login from './Login'
 
 import { parseIDsFromHref } from './location-href'
 
@@ -65,12 +67,18 @@ class AppData extends Component {
   }
 
   render() {
-    return (
-      <App  data = {this.state.data}
-            progress = {this.state.progress}
-            onCompletedContent = {this.updateProgress}
-      />
-    )
+    if (isLoggedUser()) {
+      return (
+        <App  data = {this.state.data}
+              progress = {this.state.progress}
+              onCompletedContent = {this.updateProgress}
+        />
+      )
+    } else {
+      return (
+        <Login endPoint = 'http://localhost:3100/auth/login/' />
+      )
+    }
   }
 
   updateProgress({topicId, contentId}) { 
