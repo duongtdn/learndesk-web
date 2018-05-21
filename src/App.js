@@ -49,8 +49,9 @@ class App extends Component {
                 currentIndex = {this.state.topicIndex}
                 onChangeTopic = {(index) => {this.changeTopic(index)}}
                 progress = {this.props.progress}
+                user = {this.props.user}
+                logout={this.props.logout}
         />
-
         <div className="row">
 
           <div className="w3-threequarter w3-container">

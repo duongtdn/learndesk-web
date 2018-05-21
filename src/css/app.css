@@ -48,3 +48,16 @@
 .no-outline:focus {
   outline: 0 none;
 }
+
+.sidebar-user {
+  margin: 16px 4px;
+}
+
+.align-center-text {
+  text-align: center;
+}
+
+.align-center-img {
+  margin: auto;
+  display: block;
+}

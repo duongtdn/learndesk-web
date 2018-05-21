@@ -2,13 +2,17 @@
 
 import React, { Component } from 'react'
 
+import SideBar from './SideBar'
+
 class Header extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { showDropdown: false };
+    this.state = { showDropdown: false, showSideBar: false };
 
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.toggleSideBar = this.toggleSideBar.bind(this);
+    this.closeSideBar = this.closeSideBar.bind(this);
     this.getTopicCompletion = this.getTopicCompletion.bind(this);
   }
 
@@ -34,11 +38,19 @@ class Header extends Component {
             &nbsp; <i className="fa fa-caret-down"></i>
           </a>
           
-          <a href="#" className="w3-bar-item w3-button w3-right w3-green">
+          <a href="#" className="w3-bar-item w3-button w3-right w3-green"
+             onClick={this.toggleSideBar}
+          >
             <i className="fa fa-bars" />
           </a>
 
         </div>
+
+        <SideBar user={this.props.user}
+                 logout={this.props.logout} 
+                 show={this.state.showSideBar}
+                 close={this.closeSideBar}
+        />
 
         {/* dropdown  */}
         <div className={`w3-dropdown-content w3-light-grey ${drop}`} style={{fontFamily: 'Caveat', fontSize: '22px', padding: 0, width: '100%', zIndex: 999}}>
@@ -65,6 +77,18 @@ class Header extends Component {
   toggleDropdown() {
     this.setState({
       showDropdown: !this.state.showDropdown
+    })
+  }
+
+  toggleSideBar() {
+    this.setState({
+      showSideBar: !this.state.showSideBar
+    })
+  }
+
+  closeSideBar() {
+    this.setState({
+      showSideBar: false
     })
   }
 
