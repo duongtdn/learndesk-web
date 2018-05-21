@@ -20,40 +20,45 @@ class Login extends Component {
           <a href="#" className="w3-bar-item w3-button w3-border-right">Learn <span className="w3-text-blue">Desk</span></a>
         </div>
 
-        <div className="w3-container w3-text-red" style={{marginTop: '16px'}}>
-          <p> {this.state.error} </p>
-        </div>
+        <div className="w3-border" style={{maxWidth: '600px', margin: '32px auto'}} >
 
-        <div className="w3-container" style={{marginTop: '32px'}}>
-
-          <div className="w3-container w3-blue" style={{marginBottom: '32px'}}>
+          <div className="w3-container w3-blue" style={{marginBottom: '16px'}}>
             <h4> Login </h4>
           </div>
 
-          <p>
-            <label>Email</label>
-            <input className="w3-input" type="text" 
-                   value={this.state.email}
-                   onChange={evt => this.handleEmailInput(evt)}
-                   onKeyUp={evt => this.handleEmailKeyUp(evt)}
-            />
-          </p>
-
-          <p>
-            <label>Password</label>
-            <input className="w3-input" type="password" 
-                   value={this.state.password}
-                   onChange={evt => this.handlePasswordInput(evt)}
-                   onKeyUp={evt => this.handlePasswordKeyUp(evt)}
-            />
-          </p>
-
-          <div style={{padding: '32px 0'}}>
-            <button className="w3-button w3-blue" onClick={this.login}> Login </button>
-            <button className="w3-button w3-text-orange w3-right"> Create an account </button>
+          <div className="w3-container w3-text-red" style={{}}>
+            <p> {this.state.error} </p>
           </div>
 
-          <label className="w3-text-blue"> Forget password, click here </label>
+          <div className="w3-container" style={{marginTop: '32px'}}>
+            <p>
+              <label>Email</label>
+              <input className="w3-input" type="text" 
+                    value={this.state.email}
+                    onChange={evt => this.handleEmailInput(evt)}
+                    onKeyUp={evt => this.handleEmailKeyUp(evt)}
+              />
+            </p>
+
+            <p>
+              <label>Password</label>
+              <input className="w3-input" type="password" 
+                    value={this.state.password}
+                    onChange={evt => this.handlePasswordInput(evt)}
+                    onKeyUp={evt => this.handlePasswordKeyUp(evt)}
+              />
+            </p>
+
+            <div style={{padding: '32px 0'}}>
+              <button className="w3-button w3-blue" onClick={this.login}> Login </button>
+              <button className="w3-button w3-text-orange w3-right"> Create an account </button>
+            </div>
+
+            <label className="w3-text-blue"> Forget password, click here </label>
+
+            <div style={{marginBottom: '32px'}} />
+
+          </div>
 
         </div>
 
