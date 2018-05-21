@@ -58,7 +58,7 @@ const data = [
 class AppData extends Component {
   constructor(props) {
     super(props);
-    this.state = { data, progress }
+    this.state = { data, progress, user: null }
     this.updateProgress = this.updateProgress.bind(this);
   }
 
@@ -67,7 +67,7 @@ class AppData extends Component {
   }
 
   render() {
-    if (isLoggedUser()) {
+    if (this.state.user) {
       return (
         <App  data = {this.state.data}
               progress = {this.state.progress}
@@ -76,9 +76,14 @@ class AppData extends Component {
       )
     } else {
       return (
-        <Login endPoint = 'http://localhost:3100/auth/login/' />
+        <Login endPoint = 'http://localhost:3100/auth/login'
+               onUserLoggedIn = {user => this.onUserLoggedIn(user)} />
       )
     }
+  }
+
+  onUserLoggedIn(user) {
+    this.setState({ user })
   }
 
   updateProgress({topicId, contentId}) { 

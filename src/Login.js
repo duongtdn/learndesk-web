@@ -35,6 +35,7 @@ class Login extends Component {
             <input className="w3-input" type="text" 
                    value={this.state.email}
                    onChange={evt => this.handleEmailInput(evt)}
+                   onKeyUp={evt => this.handleEmailKeyUp(evt)}
             />
           </p>
 
@@ -43,6 +44,7 @@ class Login extends Component {
             <input className="w3-input" type="password" 
                    value={this.state.password}
                    onChange={evt => this.handlePasswordInput(evt)}
+                   onKeyUp={evt => this.handlePasswordKeyUp(evt)}
             />
           </p>
 
@@ -61,7 +63,8 @@ class Login extends Component {
 
   handleEmailInput(evt) {
     const email = evt.target.value;
-    this.setState({ email })
+    const error = email.length === 1 ? 'You need to login to use the service' : this.state.error; 
+    this.setState({ email, error })
   }
 
   handlePasswordInput(evt) {
@@ -86,22 +89,35 @@ class Login extends Component {
       return
     }
 
-    const email = this.state.email;
+    const username = this.state.email;
     const password = this.state.password;
 
     loginByPassword(
       this.props.endPoint, 
-      { email, password },
+      { username, password },
       {
-        onSuccess: user => console.log(user),
-        onFailure: error => console.log(error)
+        onSuccess: (user) => {
+          this.props.onUserLoggedIn(user)
+        },
+        onFailure: (error) => {
+          this.setState({ error: JSON.parse(error).error })
+        }
       }
       
     )
 
-    const error = '';
+  }
 
-    console.log(this.state)
+  handleEmailKeyUp(evt) {
+    if (evt.which === 13 || evt.keyCode === 13) {
+      this.login()
+    }
+  }
+
+  handlePasswordKeyUp(evt) {
+    if (evt.which === 13 || evt.keyCode === 13) {
+      this.login()
+    }
   }
 
 }
