@@ -1,7 +1,7 @@
 "use strict"
 
 import React, { Component } from 'react'
-import { isLoggedUser, getUser, logout } from '@stormgle/auth-client'
+import auth, { isLoggedUser, getUser, logout } from '@stormgle/auth-client'
 
 import App from './App'
 import Login from './Login'
@@ -64,10 +64,14 @@ class AppData extends Component {
 
   componentWillMount() {
     console.log(parseIDsFromHref());
-    if (isLoggedUser()) {
-      const user = getUser();
-      this.setState({ user })
-    }
+    auth.onStateChange( (state, user) => {
+      if (state === 'authenticated') {
+        const user = getUser();
+        this.setState({ user })
+      } else {
+        this.setState({ user: null })
+      }
+    })
   }
 
   render() {
@@ -89,15 +93,14 @@ class AppData extends Component {
   }
 
   onUserLoggedIn(user) {
-    this.setState({ user })
+    // this.setState({ user })
   }
 
   logout() {
     logout();
-    this.setState({ user: null })
   }
 
-  updateProgress({topicId, contentId}) { 
+  updateProgress({topicId, contentId}) {
     if (!progress[topicId]) {
       progress[topicId] = {};
     }
