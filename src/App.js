@@ -22,10 +22,22 @@ class App extends Component {
   }
 
   componentWillMount() {
+    this._initContentAndIndex(this.props);
+  }
+
+  componentWillReceiveProps(props) {
+    this._initContentAndIndex(props);
+  }
+
+  _initContentAndIndex(props) {
+    if (!props.data) {
+      return
+    }
+    
     const {courseId, topicId} = parseIDsFromHref();
 
     /* find the index of topicId */
-    const topics = this.props.data;
+    const topics = props.data;
     let topicIndex = 0;
     const topic = topics.filter((topic, index) => {
       if (topic.id == topicId) { // a string vs a number
@@ -36,10 +48,12 @@ class App extends Component {
     const content = topics[topicIndex].contents[0];
 
     this.setState({ topicIndex, content });
-
   }
 
   render() {
+    if (!this.props.data) {
+      return null;
+    }
     const topics = this.props.data;
     const topic = topics[this.state.topicIndex];
     const content = this.state.content;
