@@ -44,7 +44,7 @@ class App extends Component {
     const topic = topics[this.state.topicIndex];
     const content = this.state.content;
     return (
-      <div>
+      <div style = {{ display: this.props.display }} >
         <Header topics = {topics} 
                 currentIndex = {this.state.topicIndex}
                 onChangeTopic = {(index) => {this.changeTopic(index)}}

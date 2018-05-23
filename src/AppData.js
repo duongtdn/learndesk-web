@@ -8,6 +8,10 @@ import Login from './Login'
 
 import { parseIDsFromHref } from './location-href'
 
+const endPoint = {
+  login: 'http://localhost:3100/auth/login'
+}
+
 const progress = {}
 
 const data = [
@@ -75,21 +79,25 @@ class AppData extends Component {
   }
 
   render() {
-    if (this.state.user) {
-      return (
+    const _display = {
+      app: this.state.user? 'block' : 'none',
+      login: this.state.user? 'none' : 'block'
+    }
+    return (
+      <div>
         <App  data = {this.state.data}
               progress = {this.state.progress}
               onCompletedContent = {this.updateProgress}
               user = {this.state.user}
-              logout={() => this.logout()}
+              logout = {() => this.logout()}
+              display = {_display.app}
         />
-      )
-    } else {
-      return (
-        <Login endPoint = 'http://localhost:3100/auth/login'
-               onUserLoggedIn = {user => this.onUserLoggedIn(user)} />
-      )
-    }
+        <Login endPoint = {endPoint.login}
+               onUserLoggedIn = {user => this.onUserLoggedIn(user)} 
+               display = {_display.login}
+        />
+      </div>
+    )
   }
 
   onUserLoggedIn(user) {

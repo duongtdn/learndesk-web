@@ -2,19 +2,19 @@
 
 import React, { Component } from 'react'
 
-import { loginByPassword, isLoggedUser, isEmail } from '@stormgle/auth-client'
+import { loginByPassword, isEmail } from '@stormgle/auth-client'
 
 class Login extends Component {
   constructor(props) {
     super(props)
-    this.state = { email: '', password: '', error: 'You need to login to use the service' }
+    this.state = { email: 'tester@team.com', password: '123', error: 'You need to login to use the service' }
 
     this.login = this.login.bind(this)
   }
 
   render() {
     return (
-      <div  >
+      <div style = {{ display: this.props.display }} >
 
         <div className="w3-bar w3-black" style={{fontFamily: 'Caveat', fontSize: '22px'}}>
           <a href="#" className="w3-bar-item w3-button w3-border-right">Learn <span className="w3-text-blue">Desk</span></a>

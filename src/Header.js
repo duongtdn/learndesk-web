@@ -14,6 +14,7 @@ class Header extends Component {
     this.toggleSideBar = this.toggleSideBar.bind(this);
     this.closeSideBar = this.closeSideBar.bind(this);
     this.getTopicCompletion = this.getTopicCompletion.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
 
@@ -47,7 +48,7 @@ class Header extends Component {
         </div>
 
         <SideBar user={this.props.user}
-                 logout={this.props.logout} 
+                 logout={this.logout} 
                  show={this.state.showSideBar}
                  close={this.closeSideBar}
         />
@@ -72,6 +73,11 @@ class Header extends Component {
         </div>
       </div>
     )
+  }
+
+  logout() {
+    this.closeSideBar();
+    this.props.logout();
   }
 
   toggleDropdown() {
