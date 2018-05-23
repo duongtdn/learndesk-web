@@ -62,7 +62,7 @@ const data = [
 class AppData extends Component {
   constructor(props) {
     super(props);
-    this.state = { data, progress, user: null }
+    this.state = { data: null, progress, user: null }
     this.updateProgress = this.updateProgress.bind(this);
   }
 
@@ -70,12 +70,22 @@ class AppData extends Component {
     console.log(parseIDsFromHref());
     auth.onStateChange( (state, user) => {
       if (state === 'authenticated') {
-        const user = getUser();
-        this.setState({ user })
+        this._userHasLoggedIn()._loadCotentData();
       } else {
         this.setState({ user: null })
       }
     })
+  }
+
+  _userHasLoggedIn() {
+    const user = getUser();
+    this.setState({ user });
+    return this;
+  }
+
+  _loadCotentData() {
+    this.setState({ data })
+    return this;
   }
 
   render() {
