@@ -43,9 +43,9 @@ class AppData extends Component {
     /* authGet to be implemented in auth-client package */
     authGet({
       endPoint: endPoint.content,
-      service: 'content',
+      service: 'learndesk',
       onSuccess: (data) => {
-        this.setState({ data })
+        this.setState({ data, error: null })
       },
       onFailure: (error) => {
         this.setState({ error })
@@ -57,8 +57,8 @@ class AppData extends Component {
 
   render() {
     const _display = {
-      app: this.state.user? 'block' : 'none',
-      login: this.state.user? 'none' : 'block'
+      app: this.state.user && !this.state.error ? 'block' : 'none',
+      login: this.state.user && !this.state.error ? 'none' : 'block'
     }
     return (
       <div>
