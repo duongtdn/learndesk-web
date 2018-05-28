@@ -10,7 +10,7 @@ import { parseIDsFromHref } from './location-href'
 
 const endPoint = {
   login: 'http://localhost:3100/auth/login',
-  content: 'http://localhost:3301/content/emb-01'
+  content: 'http://localhost:3301/content/:courseId'
 }
 
 const progress = {}
@@ -23,7 +23,6 @@ class AppData extends Component {
   }
 
   componentWillMount() {
-    console.log(parseIDsFromHref());
     auth.onStateChange( (state, user) => {
       if (state === 'authenticated') {
         this._userHasLoggedIn()._loadContentData();
@@ -40,9 +39,10 @@ class AppData extends Component {
   }
 
   _loadContentData() {
-    /* authGet to be implemented in auth-client package */
+    const { topicId, courseId } = parseIDsFromHref();
+    const ep = endPoint.content.replace(":courseId", courseId);
     authGet({
-      endPoint: endPoint.content,
+      endPoint: ep,
       service: 'learndesk',
       onSuccess: (data) => {
         this.setState({ data, error: null })
