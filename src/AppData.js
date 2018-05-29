@@ -59,7 +59,7 @@ class AppData extends Component {
         this.setState({ data, error: null })
       },
       onFailure: (error) => {
-        this.setState({ error : parseInt(error.status) })
+        this.setState({ error : error.status })
       }
     })
     
