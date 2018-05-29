@@ -15,7 +15,9 @@ const endPoint = {
 }
 
 const link = {
-  enroll: 'https://www.google.com'
+  enroll: 'https://www.google.com',
+  account: '',
+  resetPassword: ''
 }
 
 const progress = {}
