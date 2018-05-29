@@ -102,7 +102,7 @@ class Login extends Component {
       { username, password },
       {
         onSuccess: (user) => {
-          this.props.onUserLoggedIn(user)
+          this.props.onUserLoggedIn && this.props.onUserLoggedIn(user)
         },
         onFailure: (error) => {
           this.setState({ error: JSON.parse(error).error })

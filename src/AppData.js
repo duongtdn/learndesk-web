@@ -59,7 +59,7 @@ class AppData extends Component {
         this.setState({ data, error: null })
       },
       onFailure: (error) => {
-        this.setState({ error : 403 })
+        this.setState({ error : parseInt(error.status) })
       }
     })
     
@@ -111,7 +111,7 @@ class AppData extends Component {
   }
 
   onUserLoggedIn(user) {
-    // this.setState({ user })
+    console.log('user has logged in')
   }
 
   logout() {
