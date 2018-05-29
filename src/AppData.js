@@ -111,7 +111,7 @@ class AppData extends Component {
   }
 
   onUserLoggedIn(user) {
-    console.log('user has logged in')
+    
   }
 
   logout() {
