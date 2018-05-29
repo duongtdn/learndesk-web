@@ -5,12 +5,17 @@ import auth, { isLoggedUser, getUser, logout, authGet } from '@stormgle/auth-cli
 
 import App from './App'
 import Login from './Login'
+import NotEnroll from './NotEnroll'
 
 import { parseIDsFromHref } from './location-href'
 
 const endPoint = {
   login: 'http://localhost:3100/auth/login',
   content: 'http://localhost:3301/content/:courseId'
+}
+
+const link = {
+  enroll: 'https://www.google.com'
 }
 
 const progress = {}
@@ -48,7 +53,7 @@ class AppData extends Component {
         this.setState({ data, error: null })
       },
       onFailure: (error) => {
-        this.setState({ error })
+        this.setState({ error : 403 })
       }
     })
     
@@ -56,10 +61,7 @@ class AppData extends Component {
   }
 
   render() {
-    const _display = {
-      app: this.state.user && !this.state.error ? 'block' : 'none',
-      login: this.state.user && !this.state.error ? 'none' : 'block'
-    }
+    const _display = this.decideDisplayPage();
     return (
       <div>
         <App  data = {this.state.data}
@@ -73,8 +75,33 @@ class AppData extends Component {
                onUserLoggedIn = {user => this.onUserLoggedIn(user)} 
                display = {_display.login}
         />
+        <NotEnroll  naviLink = {link.enroll}
+                    display = {_display.error}
+        />
       </div>
     )
+  }
+
+  decideDisplayPage() {
+    const _display = {
+      app: 'none',
+      login: 'none',
+      error: 'none',
+    }
+
+    if (!this.state.user) {
+      _display.login = 'block';
+      return _display
+    }
+
+    if (this.state.error && this.state.error === 403) {
+      _display.error = 'block';
+      return _display
+    }
+
+    _display.app = 'block';
+    return _display
+
   }
 
   onUserLoggedIn(user) {
