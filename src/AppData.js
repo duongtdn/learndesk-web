@@ -17,7 +17,8 @@ const endPoint = {
 const link = {
   enroll: 'https://www.google.com',
   account: '',
-  resetPassword: ''
+  resetPassword: '',
+  defaultMalePicture: "https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100"
 }
 
 const progress = {}
@@ -41,6 +42,9 @@ class AppData extends Component {
 
   _userHasLoggedIn() {
     const user = getUser();
+    if (!user.profile.picture) {
+      user.profile.picture = link.defaultMalePicture
+    }
     this.setState({ user });
     return this;
   }

@@ -18,7 +18,7 @@ class SideBar extends Component {
         >
           <span className="w3-button w3-display-topright" onClick={this.props.close}>X</span>
           <div className="w3-bar-item w3-border-bottom sidebar-user">
-            <img src="https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100"
+            <img src={user.profile.picture}
                  className="w3-image w3-round align-center-img" 
                  width={60} height={60}
                  alt="user picture" />
