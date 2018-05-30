@@ -9,16 +9,18 @@ import NotEnroll from './NotEnroll'
 
 import { parseIDsFromHref } from './location-href'
 
+import env from './env'
+
 const endPoint = {
-  login: 'http://localhost:3100/auth/login',
-  content: 'http://localhost:3301/content/:courseId'
+  login: env.ep.login,
+  content: env.ep.content
 }
 
 const link = {
-  enroll: 'https://www.google.com',
-  account: '',
-  resetPassword: '',
-  defaultMalePicture: "https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100"
+  enroll: env.ln.enroll,
+  account: env.ln.account,
+  resetPassword: env.ln.resetPassword,
+  defaultMalePicture: env.ln.dafaultMalePic
 }
 
 const progress = {}
