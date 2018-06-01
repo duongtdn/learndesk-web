@@ -12,7 +12,14 @@ const ln = {
   dafaultMalePic: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100'
 }
 
+const quizPlayerVars = {
+  apiSrc: 'http://localhost:3200/quiz_api',
+  iframeSrc: 'http://localhost:3200/quiz/index.html',
+  origin: 'http://localhost:3200'
+}
+
 export default {
   ep,
-  ln
+  ln,
+  quizPlayerVars
 }

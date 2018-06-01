@@ -1,5 +1,7 @@
 "use strict"
 
+import env from './env'
+
 import React, { Component } from 'react'
 
 import contentStyle from 'content-presenter/dist/css/content.css'
@@ -7,6 +9,8 @@ import contentStyle from 'content-presenter/dist/css/content.css'
 import { ContentPresenter } from 'content-presenter'
 import { YoutubePlayerReactPlugin } from 'youtube-player-plugin'
 import { QuizPlayerReactPlugin } from 'quiz-player-plugin'
+
+QuizPlayerReactPlugin.setPlayerVars(env.quizPlayerVars)
 
 class ContentPlayer extends Component {
   constructor(props) {
