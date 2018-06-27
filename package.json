@@ -4,7 +4,7 @@
   "description": "web client of learn-desk",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --port 3000 --history-api-fallback"
+    "start": "webpack-dev-server --port 3300 --history-api-fallback"
   },
   "repository": {
     "type": "git",
