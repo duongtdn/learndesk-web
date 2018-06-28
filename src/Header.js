@@ -21,7 +21,7 @@ class Header extends Component {
   render() {
     const topics = this.props.topics;
     const index = this.props.currentIndex || 0;
-    const currentTopic = topics[index];
+    const currentTopic = topics && topics[index];
     const completion = this.getTopicCompletion();
     const drop = this.state.showDropdown ? 'w3-show' : 'w3-hide';
     return (
@@ -30,14 +30,19 @@ class Header extends Component {
           
           <a href="#" className="w3-bar-item w3-button w3-border-right">Learn <span className="w3-text-blue">Desk</span></a>
           
-          <a href="#" className="w3-bar-item w3-button" onClick={this.toggleDropdown}> 
-            <span > Topic {currentTopic.id} </span> &nbsp;
-            <span className="w3-hide-small"> 
-              <i className="fa fa-angle-right"></i>
-              &nbsp; {currentTopic.title} 
-            </span>
-            &nbsp; <i className="fa fa-caret-down"></i>
-          </a>
+          {
+            topics ? 
+              <a href="#" className="w3-bar-item w3-button" onClick={this.toggleDropdown}> 
+                <span > Topic {currentTopic.id} </span> &nbsp;
+                <span className="w3-hide-small"> 
+                  <i className="fa fa-angle-right"></i>
+                  &nbsp; {currentTopic.title} 
+                </span>
+                &nbsp; <i className="fa fa-caret-down"></i>
+              </a>
+              : null
+          }
+          
           
           <a href="#" className="w3-bar-item w3-button w3-right w3-green"
              onClick={this.toggleSideBar}
@@ -54,23 +59,27 @@ class Header extends Component {
         />
 
         {/* dropdown  */}
-        <div className={`w3-dropdown-content w3-light-grey ${drop}`} style={{fontFamily: 'Caveat', fontSize: '22px', padding: 0, width: '100%', zIndex: 999}}>
-          {
-            topics.map((topic,index) => (
-              <a key = {topic.id} href={`#${topic.id}`} className="w3-button w3-border-bottom" style={{width: '100%', textAlign: 'left'}} onClick={() => this.changeTopic(index)}> 
-                <div className="dropdown-container">
-                  <div >
-                    <div className="w3-text-blue"> Topic {topic.id} </div>
-                    <div style={{whiteSpace: 'normal'}}> {topic.name} </div>
-                  </div>
-                  <div className="dropdown-check w3-text-green" style={{display: `${completion[index]?'block':'none'}`}}>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </a>
-            ))
-          }
-        </div>
+        {
+          topics ?
+            <div className={`w3-dropdown-content w3-light-grey ${drop}`} style={{fontFamily: 'Caveat', fontSize: '22px', padding: 0, width: '100%', zIndex: 999}}>
+              {
+                topics.map((topic,index) => (
+                  <a key = {topic.id} href={`#${topic.id}`} className="w3-button w3-border-bottom" style={{width: '100%', textAlign: 'left'}} onClick={() => this.changeTopic(index)}> 
+                    <div className="dropdown-container">
+                      <div >
+                        <div className="w3-text-blue"> Topic {topic.id} </div>
+                        <div style={{whiteSpace: 'normal'}}> {topic.name} </div>
+                      </div>
+                      <div className="dropdown-check w3-text-green" style={{display: `${completion[index]?'block':'none'}`}}>
+                        <i className="fa fa-check" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </a>
+                ))
+              }
+            </div>
+            : null
+        }
       </div>
     )
   }
@@ -106,6 +115,10 @@ class Header extends Component {
   getTopicCompletion() {
     const topics = this.props.topics;
     const progress = this.props.progress || {};
+
+    if (!topics) {
+      return null;
+    }
 
     return topics.map((topic) => {
       let completed = true;

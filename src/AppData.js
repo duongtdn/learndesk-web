@@ -86,6 +86,8 @@ class AppData extends Component {
         <Error  naviLink = {link.enroll}
                 display = {_display.error}
                 errCode = {this.state.error}
+                user = {this.state.user}
+                logout = {() => this.logout()}
         />
       </div>
     )
