@@ -5,7 +5,7 @@ import auth, { isLoggedUser, getUser, logout, authGet } from '@stormgle/auth-cli
 
 import App from './App'
 import Login from './Login'
-import NotEnroll from './NotEnroll'
+import Error from './Error'
 
 import { parseIDsFromHref } from './location-href'
 
@@ -83,8 +83,9 @@ class AppData extends Component {
                onUserLoggedIn = {user => this.onUserLoggedIn(user)} 
                display = {_display.login}
         />
-        <NotEnroll  naviLink = {link.enroll}
-                    display = {_display.error}
+        <Error  naviLink = {link.enroll}
+                display = {_display.error}
+                errCode = {this.state.error}
         />
       </div>
     )
@@ -102,7 +103,7 @@ class AppData extends Component {
       return _display
     }
 
-    if (this.state.error && this.state.error === 403) {
+    if (this.state.error) {
       _display.error = 'block';
       return _display
     }
