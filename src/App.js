@@ -2,9 +2,6 @@
 
 import React, { Component } from 'react'
 
-import style from './css/app.css'
-import w3 from './css/w3.css'
-
 import Header from './Header'
 import ContentPlayer from './ContentPlayer'
 import ContentList from './ContentList'
