@@ -13,9 +13,9 @@ const ln = {
 }
 
 const quizPlayerVars = {
-  apiSrc: 'http://localhost:3400/quiz_api',
-  iframeSrc: 'http://localhost:3400/quiz/index.html',
-  origin: 'http://localhost:3400'
+  apiSrc: 'http://localhost:3800/quiz/quiz_api.js',
+  iframeSrc: 'http://localhost:3800/quiz/index.html',
+  origin: 'http://localhost:3800'
 }
 
 export default {
