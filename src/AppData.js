@@ -1,7 +1,7 @@
 "use strict"
 
 import React, { Component } from 'react'
-import auth, { isLoggedUser, getUser, logout, authGet } from '@stormgle/auth-client'
+import auth, { isLoggedUser, getUser, logout, authGet, authPost } from '@stormgle/auth-client'
 
 import App from './App'
 import Login from './Login'
@@ -77,7 +77,8 @@ class AppData extends Component {
       endPoint: ep,
       service: 'learndesk',
       onSuccess: (data) => {
-        this.setState({ progress: data, error: null })
+        console.log(data.progress)
+        this.setState({ progress: data.progress, error: null })
       },
       onFailure: (error) => {
         this.setState({ error : error.status })
@@ -152,7 +153,21 @@ class AppData extends Component {
       progress[topicId] = {};
     }
     progress[topicId][contentId] = true;
-    this.setState({ progress })
+    this.setState({ progress });
+
+    const _id = parseIDsFromHref();
+    const ep = `${endPoint.progress}/progress/${_id.courseId}`
+    authPost({
+      endPoint: ep,
+      service: 'learndesk',
+      data: { progress },
+      onSuccess: (data) => {
+        console.log('updated progress to server')
+      },
+      onFailure: (error) => {
+        // this.setState({ error : error.status })
+      }
+    })
   }
 }
 
