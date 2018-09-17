@@ -2,7 +2,8 @@
 
 const ep = {
   login: 'http://localhost:3100/auth/login',
-  content: 'http://localhost:3301/content/:courseId'
+  content: 'http://localhost:3301/content/:courseId',
+  progress: 'http://localhost:3302'
 }
 
 const ln = {

@@ -13,7 +13,8 @@ import env from './env'
 
 const endPoint = {
   login: env.ep.login,
-  content: env.ep.content
+  content: env.ep.content,
+  progress: env.ep.progress
 }
 
 const link = {
@@ -23,21 +24,19 @@ const link = {
   defaultMalePicture: env.ln.dafaultMalePic
 }
 
-const progress = {}
-
 auth.xsite.listen();
 
 class AppData extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: null, progress, user: undefined, error: null }
+    this.state = { data: null, progress: {}, user: undefined, error: null }
     this.updateProgress = this.updateProgress.bind(this);
   }
 
   componentWillMount() {
     auth.onStateChange( (state, user) => {
       if (state === 'authenticated') {
-        this._userHasLoggedIn()._loadContentData();
+        this._userHasLoggedIn()._loadContentData()._loadUserProgress();
       } else {
         this.setState({ user: null })
       }
@@ -70,11 +69,28 @@ class AppData extends Component {
     return this;
   }
 
+  _loadUserProgress() {
+    const { topicId, courseId } = parseIDsFromHref();
+    const ep = `${endPoint.progress}/progress/${courseId}`
+
+    authGet({
+      endPoint: ep,
+      service: 'learndesk',
+      onSuccess: (data) => {
+        this.setState({ progress: data, error: null })
+      },
+      onFailure: (error) => {
+        this.setState({ error : error.status })
+      }
+    })
+    
+    return this;
+  }
+
   render() {
     if (this.state.user === undefined) {
       return null
     } else {
-      console.log('show main screen')
       const _display = this.decideDisplayPage();
       return (
         <div>
@@ -131,6 +147,7 @@ class AppData extends Component {
   }
 
   updateProgress({topicId, contentId}) {
+    const progress = this.state.progress;
     if (!progress[topicId]) {
       progress[topicId] = {};
     }
