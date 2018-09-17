@@ -13,8 +13,8 @@ class SideBar extends Component {
       const email = user.profile.email;
       const display = this.props.show ? 'block' : 'none';
       return (
-        <div className='w3-sidebar w3-bar-block w3-white w3-card-4 w3-animate-right' 
-             style={{ width: '250px', right: 0, zIndex:1000, display }}
+        <div className='w3-sidebar w3-bar-block w3-white w3-card-4' 
+             style={{ width: '300px', right: 0, zIndex:1000, display }}
         >
           <span className="w3-button w3-display-topright" onClick={this.props.close}>X</span>
           <div className="w3-bar-item w3-border-bottom sidebar-user">
