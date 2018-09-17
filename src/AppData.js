@@ -30,7 +30,7 @@ auth.xsite.listen();
 class AppData extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: null, progress, user: null, error: null }
+    this.state = { data: null, progress, user: undefined, error: null }
     this.updateProgress = this.updateProgress.bind(this);
   }
 
@@ -71,28 +71,33 @@ class AppData extends Component {
   }
 
   render() {
-    const _display = this.decideDisplayPage();
-    return (
-      <div>
-        <App  data = {this.state.data}
-              progress = {this.state.progress}
-              onCompletedContent = {this.updateProgress}
-              user = {this.state.user}
-              logout = {() => this.logout()}
-              display = {_display.app}
-        />
-        <Login endPoint = {endPoint.login}
-               onUserLoggedIn = {user => this.onUserLoggedIn(user)} 
-               display = {_display.login}
-        />
-        <Error  naviLink = {link.enroll}
-                display = {_display.error}
-                errCode = {this.state.error}
+    if (this.state.user === undefined) {
+      return null
+    } else {
+      console.log('show main screen')
+      const _display = this.decideDisplayPage();
+      return (
+        <div>
+          <App  data = {this.state.data}
+                progress = {this.state.progress}
+                onCompletedContent = {this.updateProgress}
                 user = {this.state.user}
                 logout = {() => this.logout()}
-        />
-      </div>
-    )
+                display = {_display.app}
+          />
+          <Login endPoint = {endPoint.login}
+                onUserLoggedIn = {user => this.onUserLoggedIn(user)} 
+                display = {_display.login}
+          />
+          <Error  naviLink = {link.enroll}
+                  display = {_display.error}
+                  errCode = {this.state.error}
+                  user = {this.state.user}
+                  logout = {() => this.logout()}
+          />
+        </div>
+      )
+    }
   }
 
   decideDisplayPage() {
