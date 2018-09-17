@@ -25,6 +25,8 @@ const link = {
 
 const progress = {}
 
+auth.xsite.listen();
+
 class AppData extends Component {
   constructor(props) {
     super(props);
