@@ -77,7 +77,6 @@ class AppData extends Component {
       endPoint: ep,
       service: 'learndesk',
       onSuccess: (data) => {
-        console.log(data.progress)
         this.setState({ progress: data.progress, error: null })
       },
       onFailure: (error) => {
