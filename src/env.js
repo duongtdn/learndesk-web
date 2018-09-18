@@ -7,7 +7,7 @@ const ep = {
 }
 
 const ln = {
-  enroll: 'https://www.google.com',
+  enroll: 'http://localhost:3200/me/enrolled',
   account: '',
   resetPassword: '',
   dafaultMalePic: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100'
