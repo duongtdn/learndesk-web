@@ -187,6 +187,13 @@ class AppData extends Component {
 
   updateProgress({topicId, contentId}) {
     const progress = this.state.progress;
+
+    // not update if progress is not change
+    if (progress[topicId] && progress[topicId][contentId]) {
+      console.log('do not need to update progress')
+      return
+    }
+
     if (!progress[topicId]) {
       progress[topicId] = {};
     }
