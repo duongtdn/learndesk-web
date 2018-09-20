@@ -20,3 +20,7 @@ export function parseIDsFromHref() {
   return { topicId: null, courseId:null }
   
 }
+
+export function setLocationHref(url) {
+  window.location.href = url
+}

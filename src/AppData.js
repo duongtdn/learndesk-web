@@ -7,7 +7,7 @@ import App from './App'
 import Login from './Login'
 import Error from './Error'
 
-import { parseIDsFromHref } from './location-href'
+import { parseIDsFromHref, setLocationHref } from './location-href'
 
 import env from './env'
 
@@ -36,7 +36,21 @@ class AppData extends Component {
   componentWillMount() {
     auth.onStateChange( (state, user) => {
       if (state === 'authenticated') {
-        this._userHasLoggedIn()._loadContentData()._loadUserProgress();
+        Promise.all([
+          this._userHasLoggedIn(),
+          this._loadContentData(),
+          this._loadUserProgress()
+        ])
+        .then(values => {
+          const user = values[0];
+          const data = values[1];
+          const progress = values[2];
+          this._changeHrefByProgress({content: data, progress})
+          this.setState({user, data, progress, error: null})
+        })
+        .catch(err => {
+          console.log(err)
+        })
       } else {
         this.setState({ user: null })
       }
@@ -48,43 +62,68 @@ class AppData extends Component {
     if (!user.profile.picture) {
       user.profile.picture = link.defaultMalePicture
     }
-    this.setState({ user });
-    return this;
+    return Promise.resolve(user)
   }
 
   _loadContentData() {
     const { topicId, courseId } = parseIDsFromHref();
     const ep = endPoint.content.replace(":courseId", courseId);
-    authGet({
-      endPoint: ep,
-      service: 'learndesk',
-      onSuccess: (data) => {
-        this.setState({ data, error: null })
-      },
-      onFailure: (error) => {
-        this.setState({ error : error.status })
-      }
+    return new Promise((resolve, reject) => {
+      authGet({
+        endPoint: ep,
+        service: 'learndesk',
+        onSuccess: (data) => {
+          resolve(data)
+        },
+        onFailure: (error) => {
+          reject(error.status)
+        }
+      })
     })
-    
-    return this;
   }
 
   _loadUserProgress() {
     const { topicId, courseId } = parseIDsFromHref();
     const ep = `${endPoint.progress}/progress/${courseId}`
 
-    authGet({
-      endPoint: ep,
-      service: 'learndesk',
-      onSuccess: (data) => {
-        this.setState({ progress: data.progress, error: null })
-      },
-      onFailure: (error) => {
-        this.setState({ error : error.status })
-      }
+    return new Promise((resolve, reject) => {
+      authGet({
+        endPoint: ep,
+        service: 'learndesk',
+        onSuccess: (data) => {
+          resolve(data.progress)
+        },
+        onFailure: (error) => {
+          reject(error.status)
+        }
+      })
     })
+
+  }
+
+  _changeHrefByProgress({content, progress}) {
     
-    return this;
+    const href = window.location.href;
+    const _baseUrl = href.split('#')[0];
+    let  _lastTopic = 0;
+    for(let i = 0; i < content.length; i++) {
+      const topic = content[i];
+      if (progress[topic.id]) {
+        const p = progress[topic.id];
+        if (Object.keys(p).length < topic.contents.length) {
+          console.log(`${_baseUrl}#${topic.id}`)
+          setLocationHref(`${_baseUrl}#${topic.id}`)
+          return topic.id
+        } else if (Object.keys(p).length === topic.contents.length) {
+          _lastTopic = i;
+        }
+      } else if (_lastTopic > 0) {
+        console.log(`${_baseUrl}#${topic.id}`)
+        setLocationHref(`${_baseUrl}#${topic.id}`)
+        return topic.id
+      }
+    }
+
   }
 
   render() {
