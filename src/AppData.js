@@ -67,7 +67,7 @@ class AppData extends Component {
 
   _loadContentData() {
     const { topicId, courseId } = parseIDsFromHref();
-    const ep = endPoint.content.replace(":courseId", courseId);
+    const ep = `${endPoint.content}/${courseId}`;  
     return new Promise((resolve, reject) => {
       authGet({
         endPoint: ep,
@@ -84,8 +84,7 @@ class AppData extends Component {
 
   _loadUserProgress() {
     const { topicId, courseId } = parseIDsFromHref();
-    const ep = `${endPoint.progress}/progress/${courseId}`
-
+    const ep = `${endPoint.progress}/${courseId}`
     return new Promise((resolve, reject) => {
       authGet({
         endPoint: ep,
@@ -201,7 +200,8 @@ class AppData extends Component {
     this.setState({ progress });
 
     const _id = parseIDsFromHref();
-    const ep = `${endPoint.progress}/progress/${_id.courseId}`
+    const ep = `${endPoint.progress}/${_id.courseId}`
+console.log(ep)
     authPost({
       endPoint: ep,
       service: 'learndesk',
