@@ -201,7 +201,6 @@ class AppData extends Component {
 
     const _id = parseIDsFromHref();
     const ep = `${endPoint.progress}/${_id.courseId}`
-console.log(ep)
     authPost({
       endPoint: ep,
       service: 'learndesk',
