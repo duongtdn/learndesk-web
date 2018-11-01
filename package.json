@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/duongtdn/learndesk-web#readme",
   "dependencies": {
-    "@stormgle/auth-client": "^1.1.0",
+    "@stormgle/auth-client": "^1.2.4",
     "content-presenter": "^2.0.2",
     "quiz-player-plugin": "^1.2.0",
     "react": "^16.3.0",
