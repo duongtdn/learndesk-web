@@ -7,7 +7,7 @@ import { loginByPassword, isEmail } from '@stormgle/auth-client'
 class Login extends Component {
   constructor(props) {
     super(props)
-    this.state = { email: 'tester@team.com', password: '123', error: 'You need to login to use the service' }
+    this.state = { email: '', password: '', error: 'You need to login to use the service', connecting: false }
 
     this.login = this.login.bind(this)
   }
@@ -37,6 +37,7 @@ class Login extends Component {
                     value={this.state.email}
                     onChange={evt => this.handleEmailInput(evt)}
                     onKeyUp={evt => this.handleEmailKeyUp(evt)}
+                    disabled= {this.state.connecting}
               />
             </p>
 
@@ -46,15 +47,16 @@ class Login extends Component {
                     value={this.state.password}
                     onChange={evt => this.handlePasswordInput(evt)}
                     onKeyUp={evt => this.handlePasswordKeyUp(evt)}
+                    disabled= {this.state.connecting}
               />
             </p>
 
             <div style={{padding: '32px 0'}}>
-              <button className="w3-button w3-blue" onClick={this.login}> Login </button>
-              <button className="w3-button w3-text-orange w3-right"> Create an account </button>
+              <button className="w3-button w3-blue" onClick={this.login} disabled= {this.state.connecting}> Login </button>
+              {/* <button className="w3-button w3-text-orange w3-right"> Create an account </button> */}
             </div>
 
-            <label className="w3-text-blue"> Forget password, click here </label>
+            <label className="w3-text-blue"> Forget password, <a href={`${this.props.resetPasswordLink}?email=${this.state.email}`}> click here </a> </label>
 
             <div style={{marginBottom: '32px'}} />
 
@@ -103,13 +105,15 @@ class Login extends Component {
       {
         onSuccess: (user) => {
           this.props.onUserLoggedIn && this.props.onUserLoggedIn(user)
+          this.setState({connecting: false})
         },
         onFailure: (error) => {
-          this.setState({ error: JSON.parse(error).error })
+          this.setState({ error: JSON.parse(error).error, connecting: false })
         }
-      }
-      
+      }    
     )
+
+    this.setState({connecting: true})
 
   }
 

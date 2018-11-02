@@ -20,7 +20,7 @@ const endPoint = {
 const link = {
   enroll: env.ln.enroll,
   account: env.ln.account,
-  resetPassword: env.ln.resetPassword,
+  resetPasswordLink: env.ln.resetPasswordLink,
   defaultMalePicture: env.ln.dafaultMalePic
 }
 
@@ -142,6 +142,7 @@ class AppData extends Component {
           <Login endPoint = {endPoint.login}
                 onUserLoggedIn = {user => this.onUserLoggedIn(user)} 
                 display = {_display.login}
+                resetPasswordLink = {link.resetPasswordLink}
           />
           <Error  naviLink = {link.enroll}
                   display = {_display.error}

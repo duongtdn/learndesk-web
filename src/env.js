@@ -9,7 +9,7 @@ const ep = {
 const ln = {
   enroll: 'https://www.expiup.com/me/enrolled',
   account: '',
-  resetPassword: '',
+  resetPasswordLink: 'https://auth.expiup.com/auth/request_reset_password_link',
   dafaultMalePic: 'https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100'
 }
 
