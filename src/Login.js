@@ -105,10 +105,10 @@ class Login extends Component {
       {
         onSuccess: (user) => {
           this.props.onUserLoggedIn && this.props.onUserLoggedIn(user)
-          this.setState({connecting: false})
+          this.setState({connecting: false, email: '', password: ''})
         },
         onFailure: (error) => {
-          this.setState({ error: JSON.parse(error).error, connecting: false })
+          this.setState({ error: "Email or Password is incorrect. If you forget your password, enter your email, then click forgot password", connecting: false })
         }
       }    
     )
