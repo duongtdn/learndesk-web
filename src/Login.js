@@ -12,6 +12,12 @@ class Login extends Component {
     this.login = this.login.bind(this)
   }
 
+  componentWillReceiveProps(props) {
+    if (props.display !== this.props.display) {
+      this.setState({connecting: false, email: '', password: ''})
+    }
+  }
+
   render() {
     return (
       <div style = {{ display: this.props.display }} >
@@ -105,7 +111,8 @@ class Login extends Component {
       {
         onSuccess: (user) => {
           this.props.onUserLoggedIn && this.props.onUserLoggedIn(user)
-          this.setState({connecting: false, email: '', password: ''})
+          // to prevent flashing of new state, we will clear connecting, email and password state if the callback is done 
+          // by moving code to componentWillReceiveProps.
         },
         onFailure: (error) => {
           this.setState({ error: "Email or Password is incorrect. If you forget your password, enter your email, then click forgot password", connecting: false })
