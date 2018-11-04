@@ -45,7 +45,11 @@ class AppData extends Component {
           const user = values[0];
           const data = values[1];
           const progress = values[2];
-          this._changeHrefByProgress({content: data, progress})
+
+          const {courseId, topicId} = parseIDsFromHref();
+          if (!topicId) {
+            this._changeHrefByProgress({content: data, progress})
+          }
           this.setState({user, data, progress, error: null})
         })
         .catch(err => {
@@ -110,14 +114,14 @@ class AppData extends Component {
       if (progress[topic.id]) {
         const p = progress[topic.id];
         if (Object.keys(p).length < topic.contents.length) {
-          console.log(`${_baseUrl}#${topic.id}`)
+          // console.log(`${_baseUrl}#${topic.id}`)
           setLocationHref(`${_baseUrl}#${topic.id}`)
           return topic.id
         } else if (Object.keys(p).length === topic.contents.length) {
           _lastTopic = i;
         }
       } else if (_lastTopic > 0) {
-        console.log(`${_baseUrl}#${topic.id}`)
+        // console.log(`${_baseUrl}#${topic.id}`)
         setLocationHref(`${_baseUrl}#${topic.id}`)
         return topic.id
       }
