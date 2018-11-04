@@ -14,9 +14,9 @@ const ln = {
 }
 
 const quizPlayerVars = {
-  apiSrc: 'http://embed.quiz.expiup.com.s3-website-ap-southeast-1.amazonaws.com/api.bundle.js',
-  iframeSrc: 'http://embed.quiz.expiup.com.s3-website-ap-southeast-1.amazonaws.com/',
-  origin: 'http://embed.quiz.expiup.com.s3-website-ap-southeast-1.amazonaws.com'
+  apiSrc: 'https://embed.quiz.expiup.com/api.bundle.js',
+  iframeSrc: 'https://embed.quiz.expiup.com/',
+  origin: 'https://embed.quiz.expiup.com'
 }
 
 export default {
