@@ -36,25 +36,28 @@ class AppData extends Component {
   componentWillMount() {
     auth.onStateChange( (state, user) => {
       if (state === 'authenticated') {
-        Promise.all([
-          this._userHasLoggedIn(),
-          this._loadContentData(),
-          this._loadUserProgress()
-        ])
-        .then(values => {
-          const user = values[0];
-          const data = values[1];
-          const progress = values[2];
-
-          const {courseId, topicId} = parseIDsFromHref();
-          if (!topicId) {
-            this._changeHrefByProgress({content: data, progress})
-          }
-          this.setState({user, data, progress, error: null})
+        this._userHasLoggedIn()
+        .then(user => {
+          Promise.all([
+            this._loadContentData(),
+            this._loadUserProgress()
+          ])
+          .then(values => {
+            const data = values[0];
+            const progress = values[1];
+  
+            const {courseId, topicId} = parseIDsFromHref();
+            if (!topicId) {
+              this._changeHrefByProgress({content: data, progress})
+            }
+            this.setState({user, data, progress, error: null})
+          })
+          .catch(error => {
+            console.log(error)
+            this.setState({ user, error })
+          })
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch( error => this.setState({ user: null }) )
       } else {
         this.setState({ user: null })
       }
