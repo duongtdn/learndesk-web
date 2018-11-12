@@ -17,20 +17,28 @@ class SideBar extends Component {
              style={{ width: '300px', right: 0, zIndex:1000, display }}
         >
           <span className="w3-button w3-display-topright" onClick={this.props.close}>X</span>
-          <div className="w3-bar-item w3-border-bottom sidebar-user">
+          <div className="w3-bar-item sidebar-user">
             <img src={user.profile.picture}
-                 className="w3-image w3-round align-center-img" 
+                 className="w3-image w3-round " 
                  width={60} height={60}
                  alt="user picture" />
-            <p className="align-center-text"> {email} </p>
-            <button className="w3-button w3-block" 
-                    onClick={this.props.logout}
-            > 
-              Logout 
-            </button>
+            <span className="w3-margin"> {user.profile.displayName || user.profile.userName} </span>        
           </div>
+
+          <hr />
+
           <a href="#" className="w3-bar-item w3-button">Home</a>
           <a href="#" className="w3-bar-item w3-button">Link 1</a>
+
+          <hr />
+
+          <div style={{textAlign: 'center'}} >
+            <button className="w3-button w3-border w3-border-orange w3-hover-orange w3-hover-opacity w3-margin" 
+                        onClick={this.props.logout}
+              > 
+                Logout 
+            </button>
+          </div>
         </div>
       )
     } else {
