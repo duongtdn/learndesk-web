@@ -56,6 +56,7 @@ class Header extends Component {
                  logout={this.logout} 
                  show={this.state.showSideBar}
                  close={this.closeSideBar}
+                 onClick={this.props.onSelectLink}
         />
 
         {/* dropdown  */}

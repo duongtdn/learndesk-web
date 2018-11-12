@@ -62,6 +62,7 @@ class App extends Component {
                 progress = {this.props.progress}
                 user = {this.props.user}
                 logout={this.props.logout}
+                onSelectLink={this.props.onSelectLink}
         />
         <div className="row">
 

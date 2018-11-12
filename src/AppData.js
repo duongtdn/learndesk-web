@@ -6,6 +6,7 @@ import auth, { isLoggedUser, getUser, logout, authGet, authPost } from '@stormgl
 import App from './App'
 import Login from './Login'
 import Error from './Error'
+import Dashboard from './Dashboard'
 
 import { parseIDsFromHref, setLocationHref } from './location-href'
 
@@ -29,8 +30,15 @@ auth.xsite.listen();
 class AppData extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: null, progress: {}, user: undefined, error: null }
-    this.updateProgress = this.updateProgress.bind(this);
+    this.state = { 
+      data: null, 
+      progress: {}, 
+      user: undefined, 
+      error: null,
+      route: 'app' 
+    }
+    this.updateProgress = this.updateProgress.bind(this)
+    this.onSelectLink = this.onSelectLink.bind(this)
   }
 
   componentWillMount() {
@@ -145,6 +153,7 @@ class AppData extends Component {
                 user = {this.state.user}
                 logout = {() => this.logout()}
                 display = {_display.app}
+                onSelectLink = {this.onSelectLink}
           />
           <Login endPoint = {endPoint.login}
                 onUserLoggedIn = {user => this.onUserLoggedIn(user)} 
@@ -157,9 +166,18 @@ class AppData extends Component {
                   user = {this.state.user}
                   logout = {() => this.logout()}
           />
+          <Dashboard  display = {_display.dashboard}
+                      user = {this.state.user}
+                      logout = {() => this.logout()}
+                      onSelectLink = {this.onSelectLink}
+          />
         </div>
       )
     }
+  }
+
+  onSelectLink(route) {
+    this.setState({ route })
   }
 
   decideDisplayPage() {
@@ -167,6 +185,7 @@ class AppData extends Component {
       app: 'none',
       login: 'none',
       error: 'none',
+      dashboard: 'none'
     }
 
     if (!this.state.user) {
@@ -176,6 +195,11 @@ class AppData extends Component {
 
     if (this.state.error) {
       _display.error = 'block';
+      return _display
+    }
+
+    if (this.state.route === 'dashboard') {
+      _display.dashboard = 'block';
       return _display
     }
 

@@ -27,8 +27,8 @@ class SideBar extends Component {
 
           <hr />
 
-          <a href="#" className="w3-bar-item w3-button">Home</a>
-          <a href="#" className="w3-bar-item w3-button">Link 1</a>
+          <button className="w3-bar-item w3-button" onClick= {this.onClick('dashboard')}> Dash board </button>
+          <button className="w3-bar-item w3-button" onClick= {this.onClick('app')}> Study </button>
 
           <hr />
 
@@ -43,6 +43,13 @@ class SideBar extends Component {
       )
     } else {
       return null;
+    }
+  }
+
+  onClick(link) {
+    return () => {
+      this.props.onClick(link);
+      this.props.close()
     }
   }
 
