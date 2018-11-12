@@ -23,7 +23,9 @@ class App extends Component {
   }
 
   componentWillReceiveProps(props) {
-    this._initContentAndIndex(props);
+    if (!this.props.user && props.user) {
+      this._initContentAndIndex(props);
+    }
   }
 
   _initContentAndIndex(props) {
@@ -42,7 +44,7 @@ class App extends Component {
       }
     })
 
-    const content = topics[topicIndex].contents[0];
+    const content = topics[topicIndex].contents[this.state.contentIndex];
 
     this.setState({ topicIndex, content });
   }
