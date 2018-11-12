@@ -74,6 +74,13 @@ class App extends Component {
                             moveToNextContent = {() => this.changeContent(this.state.contentIndex+1)}
                             onCompletedContent = {this.completeContent}
             />
+            {
+              content.materials ?
+                <div>
+                  <h3> Download Materials </h3>
+                </div>
+              : null
+            }  
           </div>
 
           <div className="w3-quarter w3-container">
