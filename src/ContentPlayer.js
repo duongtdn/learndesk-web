@@ -38,11 +38,12 @@ class ContentPlayer extends Component {
                           onError = {err => console.log(err)}
                           onResize = {this.onResize}
         />
-        
-        <div className="w3-right w3-padding" style={{position: 'relative', zIndex: 2}} >
-          <button className="w3-button no-outline" onClick={() => this.props.moveToPreviousContent()}> Previous </button>
-          <button className="w3-button no-outline" onClick={() => this.props.moveToNextContent()}> Next </button>
-        </div>
+        <div style={{ textAlign: 'right' }} >
+          <div className="w3-padding" style={{position: 'relative', zIndex: 2}} >
+            <button className="w3-button no-outline" onClick={() => this.props.moveToPreviousContent()}> Previous </button>
+            <button className="w3-button no-outline" onClick={() => this.props.moveToNextContent()}> Next </button>
+          </div>
+        </div>       
       </div>
     )
   }
