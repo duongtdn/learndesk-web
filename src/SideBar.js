@@ -27,8 +27,8 @@ class SideBar extends Component {
 
           <hr />
 
-          <button className="w3-bar-item w3-button" onClick= {this.onClick('dashboard')}> Dash board </button>
-          <button className="w3-bar-item w3-button" onClick= {this.onClick('app')}> Study </button>
+          <button className="w3-bar-item w3-button" onClick= {this.onClick('dashboard')}> Dash Board </button>
+          <button className="w3-bar-item w3-button" onClick= {this.onClick('app')}> Study Room </button>
 
           <hr />
 
