@@ -17,7 +17,7 @@ class Dashboard extends Component {
                 onSelectLink={this.props.onSelectLink}
         />
         <div className = "w3-container">
-          <h2> Dash board</h2>
+          <h2> White board</h2>
         </div>
       </div>
     )

@@ -6,7 +6,7 @@ import auth, { isLoggedUser, getUser, logout, authGet, authPost } from '@stormgl
 import App from './App'
 import Login from './Login'
 import Error from './Error'
-import Dashboard from './Dashboard'
+import Whiteboard from './Whiteboard'
 
 import { parseIDsFromHref, setLocationHref } from './location-href'
 
@@ -35,7 +35,7 @@ class AppData extends Component {
       progress: {}, 
       user: undefined, 
       error: null,
-      route: 'app' 
+      route: 'whiteboard' 
     }
     this.updateProgress = this.updateProgress.bind(this)
     this.onSelectLink = this.onSelectLink.bind(this)
@@ -166,10 +166,12 @@ class AppData extends Component {
                   user = {this.state.user}
                   logout = {() => this.logout()}
           />
-          <Dashboard  display = {_display.dashboard}
+          <Whiteboard  display = {_display.whiteboard}
                       user = {this.state.user}
                       logout = {() => this.logout()}
                       onSelectLink = {this.onSelectLink}
+                      data = {this.state.data}
+                      progress = {this.state.progress}
           />
         </div>
       )
@@ -185,7 +187,7 @@ class AppData extends Component {
       app: 'none',
       login: 'none',
       error: 'none',
-      dashboard: 'none'
+      whiteboard: 'none'
     }
 
     if (!this.state.user) {
@@ -198,8 +200,8 @@ class AppData extends Component {
       return _display
     }
 
-    if (this.state.route === 'dashboard') {
-      _display.dashboard = 'block';
+    if (this.state.route === 'whiteboard') {
+      _display.whiteboard = 'block';
       return _display
     }
 
