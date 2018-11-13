@@ -78,6 +78,23 @@ class App extends Component {
               content.materials ?
                 <div>
                   <h3> Download Materials </h3>
+                  <table className="w3-table">
+                    <tbody> {
+                      content.materials.map( (item, index) => {
+                        return (
+                          <tr key={index} className="w3-text-blue">
+                            <td>
+                              {item.name} <br />
+                              <span className="w3-text-grey w3-small" style={{fontStyle: 'italic'}}> {item.category} </span>
+                            </td>
+                            <td>
+                              <a href={item.url} > Download </a>
+                            </td>
+                          </tr>
+                        )
+                      })
+                    } </tbody>
+                  </table>
                 </div>
               : null
             }  
