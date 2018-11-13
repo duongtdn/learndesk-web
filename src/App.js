@@ -89,9 +89,9 @@ class App extends Component {
                           <td>
                             {
                               item.type === "download" ?
-                                <a href={item.url} style={{textDecoration: 'none'}}> <i className="fa fa-download" /> Download </a>
+                                <a href={item.url} style={{textDecoration: 'none'}}> <i className="fa fa-download" /> <span className="w3-hide-small"> Download </span> </a>
                               :
-                                <a href={item.url} style={{textDecoration: 'none'}}> <i className="fa fa-external-link" /> Link </a>
+                                <a href={item.url} style={{textDecoration: 'none'}}> <i className="fa fa-external-link" /> <span className="w3-hide-small"> Link </span> </a>
                             }           
                           </td>
                         </tr>
