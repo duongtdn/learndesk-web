@@ -9,7 +9,8 @@ class Whiteboard extends Component {
     super(props)
 
     this.state = {
-      showDetailProgress: false
+      showDetailProgress: false,
+      showMaterials: {}
     }
   } 
 
@@ -21,7 +22,6 @@ class Whiteboard extends Component {
       return null;
     }
     const user = this.props.user
-    console.log(this.props.data)
     return (
       <div style = {{ display: this.props.display }} >
         <Header user = {this.props.user}
@@ -77,22 +77,66 @@ class Whiteboard extends Component {
           {
             this.props.data.map(topic => {
               const contents = topic.contents
-              return (
-                <div className="w3-container" >
-                  <h4 className=""> Topic {topic.id}: {topic.title} </h4>
-                  {
-
-                  }
-                </div>
-              )
+              const materials = [];
+              contents.forEach(content => {
+                if (content.materials) {
+                 materials.push(...content.materials)
+                }
+              })
+              if (materials.length > 0) {
+                return (
+                  <div key={topic.id} className="w3-container" >
+                    <h4 className=""> Topic {topic.id}: {topic.title} </h4>
+                    <button className="w3-button w3-small no-outline" onClick={() => this.toggleShowMaterials(topic.id)}> 
+                      {this.state.showMaterials[topic.id] ? <span> Hide detail </span> : <span> Show detail </span>}
+                      <i className={`fa ${this.state.showMaterials[topic.id]? 'fa-caret-up' : 'fa-caret-down'}`} /> 
+                    </button>
+                    {
+                      this.state.showMaterials[topic.id] ?
+                        <table className="w3-table">
+                          <tbody>{
+                            materials.map( (item, index) => (
+                              <tr key={index} className="w3-text-blue">
+                                <td>
+                                  {item.name} <br />
+                                  <span className="w3-text-grey w3-small" style={{fontStyle: 'italic'}}> {item.category} </span>
+                                </td>
+                                <td>
+                                  {
+                                    item.type === "download" ?
+                                      <a href={item.url} style={{textDecoration: 'none'}}> <i className="fa fa-download" /> <span className="w3-hide-small"> Download </span> </a>
+                                    :
+                                      <a href={item.url} style={{textDecoration: 'none'}}> <i className="fa fa-external-link" /> <span className="w3-hide-small"> Link </span> </a>
+                                  }           
+                                </td>
+                              </tr>
+                            ))
+                          }</tbody>
+                        </table>
+                      : null
+                    }
+                  </div>
+                )
+              } else {
+                return null
+              }
+             
             })
           }
-          
-
 
         </div>
       </div>
     )
+  }
+
+  toggleShowMaterials(topicId) {
+    const showMaterials = {...this.state.showMaterials};
+    if (showMaterials[topicId]) {
+      showMaterials[topicId] = false
+    } else {
+      showMaterials[topicId] = true
+    }
+    this.setState({ showMaterials })
   }
 
   _calculateTopicCompletion(topic) {
