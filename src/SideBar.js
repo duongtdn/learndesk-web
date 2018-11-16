@@ -17,15 +17,16 @@ class SideBar extends Component {
              style={{ width: '300px', right: 0, top: 0, zIndex: 1000, display }}
         >
           <span className="w3-button w3-display-topright w3-red" onClick={this.props.close}>X</span>
-          <div className="w3-bar-item sidebar-user" style={{ padding: '16px' }}>
-            <img src={user.profile.picture}
-                 className="w3-image w3-round " 
-                 width={60} height={60}
-                 alt="user picture" />
-            <span className="w3-margin"> {user.profile.displayName || user.profile.userName} </span>        
+          <div className="w3-bar-item sidebar-user w3-border-bottom" style={{ padding: '32px 16px', margin: '16px 0px' }}>
+            <div className="w3-cell">
+              <img src={user.profile.picture}
+                  className="w3-image w3-round " 
+                  width={60} height={60}
+                  alt="user picture" />
+              </div>
+            <div className="w3-container w3-cell w3-cell-middle"> {user.profile.displayName || user.profile.userName} </div>        
           </div>
 
-          <hr />
 
           <button className="w3-bar-item w3-button" onClick= {this.onClick('whiteboard')}> <i className="fa fa-area-chart w3-text-blue" /> White Board </button>
           <button className="w3-bar-item w3-button" onClick= {this.onClick('app')}> <i className="fa fa-laptop w3-text-blue" /> Study Room </button>

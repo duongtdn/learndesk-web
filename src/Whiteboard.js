@@ -30,11 +30,13 @@ class Whiteboard extends Component {
         />
         <div className = "w3-container">
           <h2 style={{marginTop: '16px'}}> 
-            <img src={user.profile.picture}
-                 className="w3-image w3-round " 
-                 width={60} height={60}
-                 alt="user picture" />
-            <span className="w3-margin"> {user.profile.displayName || user.profile.userName} </span> 
+            <div className="w3-cell">
+              <img src={user.profile.picture}
+                  className="w3-image w3-round " 
+                  width={60} height={60}
+                  alt="user picture" />
+              </div>
+            <div className="w3-container w3-cell w3-cell-middle"> {user.profile.displayName || user.profile.userName} </div> 
           </h2>
           
           <hr />
