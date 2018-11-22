@@ -166,13 +166,14 @@ class AppData extends Component {
                   user = {this.state.user}
                   logout = {() => this.logout()}
           />
-          <Whiteboard  display = {_display.whiteboard}
-                      user = {this.state.user}
-                      logout = {() => this.logout()}
-                      onSelectLink = {this.onSelectLink}
-                      data = {this.state.data.data}
-                      tests = {this.state.data.tests}
-                      progress = {this.state.progress}
+          <Whiteboard   display = {_display.whiteboard}
+                        user = {this.state.user}
+                        logout = {() => this.logout()}
+                        onSelectLink = {this.onSelectLink}
+                        data = {this.state.data.data}
+                        tests = {this.state.data.tests}
+                        progress = {this.state.progress}
+                        testResults = { {"0": {score: 90}, "1": {score: 90}, "2": {score: 95}} }
           />
         </div>
       )

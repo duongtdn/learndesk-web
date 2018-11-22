@@ -81,7 +81,7 @@ class Whiteboard extends Component {
             this.props.tests? 
               <div>
                 <p className="w3-text-blue-grey" style={{fontWeight: 'bold'}}>
-                    Completion: {this._calculateTotalCompletion()} <br />
+                    Completion: {this._calculateTestsCompletion()} <br />
                     <button className="w3-button w3-small no-outline" onClick={() => this.setState({ showDetailTestResults: ~this.state.showDetailTestResults })}> 
                       {this.state.showDetailProgress ? <span> Hide detail </span> : <span> Show detail </span>}
                       <i className={`fa ${this.state.showDetailProgress? 'fa-caret-up' : 'fa-caret-down'}`} /> 
@@ -92,6 +92,7 @@ class Whiteboard extends Component {
                     <table>
                       <tbody>{
                         this.props.tests.map( test => {
+                          const score = this.props.testResults[test.id] ? this.props.testResults[test.id].score : '...'
                           return (
                             <tr className="w3-border-bottom" key={test.id} >
                               <td className="w3-container">
@@ -99,7 +100,7 @@ class Whiteboard extends Component {
                                 <span className="w3-text-grey" > {test.description} </span>
                               </td>
                               <td className="w3-container">
-                                <span className="w3-text-grey" > 70  </span>
+                                <span className="w3-text-grey" > {score} / {test.require}  </span>
                               </td>
                             </tr>
                           )
@@ -213,6 +214,22 @@ class Whiteboard extends Component {
     } else {
       return 'Error'
     }
+  }
+
+  _calculateTestsCompletion() {
+    if (!this.props.testResults) {
+      return  `0%`
+    }
+    const testResults = this.props.testResults
+    const tests = this.props.tests
+    let completed = 0
+    tests.forEach(test => {
+      if (testResults[test.id] && testResults[test.id].score >= test.require) {
+        completed++
+      }
+    })
+    console.log(completed)
+    return  `${Math.round((completed/tests.length)*100)}%` 
   }
 
 }
