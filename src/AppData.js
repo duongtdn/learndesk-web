@@ -35,7 +35,7 @@ class AppData extends Component {
       progress: {}, 
       user: undefined, 
       error: null,
-      route: 'app' 
+      route: 'whiteboard' 
     }
     this.updateProgress = this.updateProgress.bind(this)
     this.onSelectLink = this.onSelectLink.bind(this)
@@ -147,7 +147,7 @@ class AppData extends Component {
       const _display = this.decideDisplayPage();
       return (
         <div>
-          <App  data = {this.state.data}
+          <App  data = {this.state.data.data}
                 progress = {this.state.progress}
                 onCompletedContent = {this.updateProgress}
                 user = {this.state.user}
@@ -170,7 +170,8 @@ class AppData extends Component {
                       user = {this.state.user}
                       logout = {() => this.logout()}
                       onSelectLink = {this.onSelectLink}
-                      data = {this.state.data}
+                      data = {this.state.data.data}
+                      tests = {this.state.data.tests}
                       progress = {this.state.progress}
           />
         </div>

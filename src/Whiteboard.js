@@ -10,6 +10,7 @@ class Whiteboard extends Component {
 
     this.state = {
       showDetailProgress: false,
+      showDetailTestResults: false,
       showMaterials: {}
     }
   } 
@@ -71,6 +72,48 @@ class Whiteboard extends Component {
               })
             : null
           }
+
+          <hr />
+
+          <h3 className="w3-text-blue"> Test Results </h3>
+
+          {
+            this.props.tests? 
+              <div>
+                <p className="w3-text-blue-grey" style={{fontWeight: 'bold'}}>
+                    Completion: {this._calculateTotalCompletion()} <br />
+                    <button className="w3-button w3-small no-outline" onClick={() => this.setState({ showDetailTestResults: ~this.state.showDetailTestResults })}> 
+                      {this.state.showDetailProgress ? <span> Hide detail </span> : <span> Show detail </span>}
+                      <i className={`fa ${this.state.showDetailProgress? 'fa-caret-up' : 'fa-caret-down'}`} /> 
+                    </button>
+                </p>
+                {
+                  this.state.showDetailTestResults ? 
+                    <table>
+                      <tbody>{
+                        this.props.tests.map( test => {
+                          return (
+                            <tr className="w3-border-bottom" key={test.id} >
+                              <td className="w3-container">
+                                <span className="w3-text-grey" >{test.name} </span> <br />
+                                <span className="w3-text-grey" > {test.description} </span>
+                              </td>
+                              <td className="w3-container">
+                                <span className="w3-text-grey" > 70  </span>
+                              </td>
+                            </tr>
+                          )
+                        })
+                      }</tbody>
+                    </table>
+                  : null
+                }
+              </div>
+            :
+              <p className="w3-text-grey" style={{fontStyle: 'italic'}}> This course does not require any test </p>
+          }
+          
+         
 
           <hr />
 
