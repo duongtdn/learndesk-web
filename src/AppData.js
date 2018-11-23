@@ -35,6 +35,7 @@ class AppData extends Component {
       progress: {}, 
       user: undefined, 
       error: null,
+      courseId: null,
       route: 'whiteboard' 
     }
     this.updateProgress = this.updateProgress.bind(this)
@@ -58,14 +59,14 @@ class AppData extends Component {
             if (!topicId) {
               this._changeHrefByProgress({content: data, progress})
             }
-            this.setState({user, data, progress, error: null})
+            this.setState({user, data, progress, error: null, courseId})
           })
           .catch(error => {
             console.log(error)
-            this.setState({ user, error })
+            this.setState({ user, error, courseId })
           })
         })
-        .catch( error => this.setState({ user: null }) )
+        .catch( error => this.setState({ user: null, courseId }) )
       } else {
         this.setState({ user: null })
       }
@@ -145,9 +146,17 @@ class AppData extends Component {
       return null
     } else {
       const _display = this.decideDisplayPage();
+
+      const courseId = this.state.courseId
+      const testResults = (courseId && this.state.user.testResults && this.state.user.testResults[courseId])? this.state.user.testResults[courseId] : {}
+     
+      const content = (this.state.data && this.state.data.data)? this.state.data.data : null
+
+      const tests = (this.state.data && this.state.data.tests)? this.state.data.tests : null
+
       return (
         <div>
-          <App  data = {this.state.data.data}
+          <App  data = {content}
                 progress = {this.state.progress}
                 onCompletedContent = {this.updateProgress}
                 user = {this.state.user}
@@ -170,10 +179,10 @@ class AppData extends Component {
                         user = {this.state.user}
                         logout = {() => this.logout()}
                         onSelectLink = {this.onSelectLink}
-                        data = {this.state.data.data}
-                        tests = {this.state.data.tests}
+                        data = {content}
+                        tests = {tests}
                         progress = {this.state.progress}
-                        testResults = { {"0": {score: 90}, "1": {score: 90}, "2": {score: 95}} }
+                        testResults = {testResults}
           />
         </div>
       )
