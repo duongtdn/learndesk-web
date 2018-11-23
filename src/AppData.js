@@ -148,7 +148,7 @@ class AppData extends Component {
       const _display = this.decideDisplayPage();
 
       const courseId = this.state.courseId
-      const testResults = (courseId && this.state.user.testResults && this.state.user.testResults[courseId])? this.state.user.testResults[courseId] : {}
+      const testResults = (courseId && this.state.user && this.state.user.testResults && this.state.user.testResults[courseId])? this.state.user.testResults[courseId] : {}
      
       const content = (this.state.data && this.state.data.data)? this.state.data.data : null
 
