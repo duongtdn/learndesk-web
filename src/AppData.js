@@ -47,6 +47,7 @@ class AppData extends Component {
       if (state === 'authenticated') {
         this._userHasLoggedIn()
         .then(user => {
+          const {courseId, topicId} = parseIDsFromHref();
           Promise.all([
             this._loadContentData(),
             this._loadUserProgress()
@@ -55,7 +56,6 @@ class AppData extends Component {
             const data = values[0];
             const progress = values[1];
   
-            const {courseId, topicId} = parseIDsFromHref();
             if (!topicId) {
               this._changeHrefByProgress({content: data, progress})
             }
