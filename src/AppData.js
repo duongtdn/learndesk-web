@@ -36,7 +36,7 @@ class AppData extends Component {
       user: undefined, 
       error: null,
       courseId: null,
-      route: 'whiteboard' 
+      route: 'app' 
     }
     this.updateProgress = this.updateProgress.bind(this)
     this.onSelectLink = this.onSelectLink.bind(this)

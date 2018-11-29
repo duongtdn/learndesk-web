@@ -23,6 +23,7 @@ class Whiteboard extends Component {
       return null;
     }
     const user = this.props.user
+    console.log(this.state.showDetailTestResults)
     return (
       <div style = {{ display: this.props.display }} >
         <Header user = {this.props.user}
@@ -46,7 +47,7 @@ class Whiteboard extends Component {
           
           <p className="w3-text-blue-grey" style={{fontWeight: 'bold'}}>
             Completion: {this._calculateTotalCompletion()} <br />
-            <button className="w3-button w3-small no-outline" onClick={() => this.setState({ showDetailProgress: ~this.state.showDetailProgress })}> 
+            <button className="w3-button w3-small no-outline" onClick={() => this.setState({ showDetailProgress: !this.state.showDetailProgress })}> 
               {this.state.showDetailProgress ? <span> Hide detail </span> : <span> Show detail </span>}
               <i className={`fa ${this.state.showDetailProgress? 'fa-caret-up' : 'fa-caret-down'}`} /> 
             </button>
@@ -82,26 +83,46 @@ class Whiteboard extends Component {
               <div>
                 <p className="w3-text-blue-grey" style={{fontWeight: 'bold'}}>
                     Completion: {this._calculateTestsCompletion()} <br />
-                    <button className="w3-button w3-small no-outline" onClick={() => this.setState({ showDetailTestResults: ~this.state.showDetailTestResults })}> 
-                      {this.state.showDetailProgress ? <span> Hide detail </span> : <span> Show detail </span>}
-                      <i className={`fa ${this.state.showDetailProgress? 'fa-caret-up' : 'fa-caret-down'}`} /> 
+                    <button className="w3-button w3-small no-outline" onClick={() => this.setState({ showDetailTestResults: !this.state.showDetailTestResults })}> 
+                      {this.state.showDetailTestResults ? <span> Hide detail </span> : <span> Show detail </span>}
+                      <i className={`fa ${this.state.showDetailTestResults? 'fa-caret-up' : 'fa-caret-down'}`} /> 
                     </button>
                 </p>
                 {
                   this.state.showDetailTestResults ? 
-                    <table>
+                    <table className="w3-table">
                       <tbody>{
                         this.props.tests.map( test => {
-                          const score = this.props.testResults[test.id] ? this.props.testResults[test.id].score : '...'
+                          const score = this.props.testResults[test.id] ? this.props.testResults[test.id].score : '---'
+                          let status = null;
+                          let decoStatus = 'w3-text-grey'
+                          if (this.props.testResults[test.id] && this.props.testResults[test.id].score) {
+                            if (  parseInt(this.props.testResults[test.id].score) >= parseInt(test.require) ) {
+                              status = 'PASSED'
+                              decoStatus = 'w3-text-green'
+                            } else {
+                              status = 'FAILED'
+                              decoStatus = 'w3-text-red'
+                            }
+                          }
                           return (
                             <tr className="w3-border-bottom" key={test.id} >
                               <td className="w3-container">
-                                <span className="w3-text-grey" >{test.name} </span> <br />
-                                <span className="w3-text-grey" > {test.description} </span>
+                                <span className="w3-text-blue-grey" >{test.name} </span> <br />
+                                <span className="w3-text-grey w3-small" > {test.description} </span> <br />
+                                <button className="w3-button w3-blue w3-small"> Take Test </button>
                               </td>
                               <td className="w3-container">
-                                <span className="w3-text-grey" > {score} / {test.require}  </span>
+                                {
+                                  status ?
+                                    <span className={`${decoStatus}`} > {status}  </span> 
+                                  : 
+                                    <span className={`${decoStatus}`} > Not taken </span> 
+                                }
+                                <br />
+                                <span className="w3-text-blue-grey w3-small " > {score}/{test.require} </span>
                               </td>
+                              
                             </tr>
                           )
                         })
@@ -228,7 +249,6 @@ class Whiteboard extends Component {
         completed++
       }
     })
-    console.log(completed)
     return  `${Math.round((completed/tests.length)*100)}%` 
   }
 
